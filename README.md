@@ -47,9 +47,32 @@ Nós do grupo Grupo 1, deliberamos que para a consecução de tal projeto, o fra
 
 ## Timeline
 
-- Terminar requisitos e timeline até dia 14/5
+- [X] 14/05: Terminar primeiro documento de requisitos e timeline
+- [ ] 14/05: Fazer Gantt Chart para timeline
+- [X] 14/05: Dividir Tarefas
+- [X] 14/05: Realizar primeira inspeção de Requisitos
+- [ ] 26/05: Terminar documento de projeto e Arquitetura
+- [ ] 26/05: Terminar inspeção de documento de projeto
+- [ ] 26/05: Fazer sistema e página de login
+- [ ] 26/05: Fazer uma de todos os artefatos
+- [ ] 04/06: Terminar documentos de planejamento de testes
+- [ ] 04/06: Implementar C.R.U.D. e busca de listas de inspeção no backend
+- [ ] 23/06: Terminar listagem dos casos de teste
+- [ ] 23/06: Fazer sistema de gerenciamento de inspeções
+- [ ] 23/06: Fazer sistema de gerenciamento de transeuntes
+- [ ] 23/06: Inspecionar e testar a implementação até o momento
+- [ ] 02/07: Fazer slideshow de apresentação
+- [ ] 02/07: Finalizar pendências de outras fases
+- [ ] 02/07: Testes finais
 
 
-## Tarefas
-## Conclusão
+## Contribuições
+
+Merges na branch principal são possíveis somente após a revisão de um code owner a uma Pull Request.
+Uma Pull Request pode ser usada para que um contribuidor solicite ajuda no desenvolvimento de uma feature.
+
+## Gerenciamento de Projeto
+Na aba Projects encontra-se uma ferramenta que auxilia a visualização de tarefas a fazer, em andamento ou concluidas.
+
+
 
