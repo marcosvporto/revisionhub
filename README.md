@@ -40,6 +40,10 @@ Nós do grupo Grupo 1, deliberamos que para a consecução de tal projeto, o fra
 
 ## Casos de uso
 
+## Diagrama de Classes
+
+![Diagrama de Classes](https://user-images.githubusercontent.com/39508000/81764412-e9babc80-94a7-11ea-8a11-b07a358dfa0d.jpeg)
+
 
 ## Timeline
 
