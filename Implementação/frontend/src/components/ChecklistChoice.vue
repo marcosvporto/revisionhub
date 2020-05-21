@@ -7,7 +7,7 @@
             </div>
         </div>
         <div id="select-container">
-            <checklist-opcoes class="select-box"></checklist-opcoes>
+            <checklist-opcoes class="select-box" :options="optionsMock" :values="values" v-model="selectedChecklist" label="Preencha"></checklist-opcoes>
             <button>Go</button>
         </div>
 
@@ -18,6 +18,14 @@
     import CheckListOpcoes from './ChecklistOpcoes'
     export default {
         name: "ChecklistChoice",
+        data: function() {
+            return {
+                optionsMock: ['Teste1','Teste2','Checklist Teste'],
+                values: [1,2,3],
+                selectedChecklist: null
+            };
+        },
+
         components:
         {
             'checklist-opcoes': CheckListOpcoes
@@ -46,7 +54,7 @@
 
     #select-container
     {
-        width: 70%;
+        width: 60%;
         display:flex;
         flex-direction: row;
         justify-content: space-between;
@@ -62,9 +70,11 @@
     {
         flex: 0 1 auto;
         padding: 12px 35px;
-        border-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
         border: none;
         color: var(--dark);
+        background-color: var(--light);
         height:100%;
     }
 
