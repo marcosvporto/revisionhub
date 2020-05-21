@@ -7,6 +7,9 @@
 
 <script>
 import Navbar from './components/Navbar'
+
+require('../node_modules/@fortawesome/fontawesome-free/css/all.min.css')
+
 export default {
   name: 'App',
   components: {
@@ -23,7 +26,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: white;
-    margin: 0px;
+    margin: 0;
     background-color: var(--dark);
     min-width: 500px;
   }
@@ -33,10 +36,6 @@ export default {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-  }
-  navbar
-  {
-    flex: 0 0 auto;
   }
   #router-view
   {

@@ -1,6 +1,8 @@
 <template>
     <div class="select-box" v-click-outside="close">
-        <input @click.self="click()" class="select-label" v-model="currentLabel" />
+        <input @click.self="click()" class="select-label" v-model="currentLabel"
+               :style="(currentLabel === label)?'color:var(--light)':''"/>
+        <i @click.self="click()" class="fas fa-caret-down caret-icon"></i>
         <div class="select-options" v-show="isOpen">
             <checklistItem
                     v-for="(option,index) in currentOptions"
@@ -16,6 +18,7 @@
 
 <script>
     import checklistItem from './ChecklistItem'
+
     export default {
         name: 'checklistOpcoes',
         components: {
@@ -29,7 +32,7 @@
             },
             values: {
                 required: true,
-                type:Array
+                type: Array
             },
             value: {
                 required: true
@@ -42,23 +45,22 @@
             }
         },
         methods: {
-            click () {
-                if(this.options.length > 0)
-                {
+            click() {
+                if (this.options.length > 0) {
                     this.isOpen = !this.isOpen
                 }
             },
-            close () {
+            close() {
                 this.isOpen = false
             },
-            clickOption (option) {
+            clickOption(option) {
                 this.close()
                 this.$emit('input', option)
             }
         },
         computed: {
             currentLabel: {
-                get () {
+                get() {
                     if (!this.isOpen) {
                         if (this.value) {
                             return this.options[this.values.findIndex(v => {
@@ -71,11 +73,11 @@
                         return this.searchValue
                     }
                 },
-                set (newValue) {
+                set(newValue) {
                     this.searchValue = newValue
                 }
             },
-            currentOptions () {
+            currentOptions() {
                 if (!this.searchValue) return this.options
                 else {
                     return this.options.filter((option) => {
@@ -92,19 +94,21 @@
     input:focus {
         outline: none;
     }
+
     .select-box {
         background: #fff;
         display: flex;
-        flex-flow: column;
+        flex-flow: row;
         align-items: center;
         position: relative;
         padding: 0 5px;
         height: 100%;
         width: 100%;
     }
+
     .select-label {
-        height: 100%;
-        width: 100%;
+        flex: 1 1 auto;
+        height: 90%;
         display: inline-flex;
         align-items: center;
         cursor: pointer;
@@ -112,14 +116,26 @@
         border: none;
         font-size: 15px;
     }
+
     .select-options {
         width: 100%;
         height: fit-content;
         z-index: 100;
         position: absolute;
         top: 100%;
+        left:0;
         border: 1px #bbb solid;
-        border-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
         box-shadow: 0 0 1px 1px #ddd;
+    }
+
+    .caret-icon {
+        flex: 0 0 auto;
+        color:black;
+        cursor:pointer;
+        height: 100%;
+        display:flex;
+        align-items: center;
     }
 </style>

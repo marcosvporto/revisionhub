@@ -7,7 +7,7 @@
             </div>
         </div>
         <div id="select-container">
-            <checklist-opcoes class="select-box" :options="optionsMock" :values="values" v-model="selectedChecklist" label="Preencha"></checklist-opcoes>
+            <checklist-opcoes class="select-box" :options="optionsMock" :values="values" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
             <button>Go</button>
         </div>
 
@@ -39,13 +39,14 @@
         color:var(--light);
         text-align: justify;
         width: min-content;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
+        margin-top: 10%
     }
     #main-text
     {
         font-size: 50px;
         white-space: nowrap;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
     #secondary-text
     {
@@ -83,7 +84,6 @@
         text-align: left;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: baseline;
         padding:20px;
     }
