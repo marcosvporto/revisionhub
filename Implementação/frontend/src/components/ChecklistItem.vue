@@ -16,7 +16,6 @@
     /* Corpo da opção */
     .option-box{
         border-bottom: 1px #bbb solid;
-        width: 100%;
         background: #fff;
         display:flex;
         flex-flow:column;
@@ -25,5 +24,9 @@
     }
     .option-box:hover {
         background: var(--light)
+    }
+    .option-label {
+        color: var(--dark);
+        width:100%;
     }
 </style>

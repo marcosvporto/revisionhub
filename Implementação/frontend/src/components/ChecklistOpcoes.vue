@@ -1,14 +1,14 @@
 <template>
     <div class="select-box" v-click-outside="close">
-        <input @click.self="click" class="select-label form-control custom-select" v-model="currentLabel" />
+        <input @click.self="click()" class="select-label" v-model="currentLabel" />
         <div class="select-options" v-show="isOpen">
             <checklistItem
                     v-for="(option,index) in currentOptions"
                     :key="index"
-                    @click.native="clickOption(option.value)"
+                    @click.native="clickOption(values[index])"
                     v-show="currentOptions.length>0"
             >
-                <template v-slot:label>{{option.nome}}</template>
+                <template v-slot:label>{{option}}</template>
             </checklistItem>
         </div>
     </div>
@@ -23,7 +23,14 @@
         },
         props: {
             label: String,
-            options: Array,
+            options: {
+                required: true,
+                type: Array
+            },
+            values: {
+                required: true,
+                type:Array
+            },
             value: {
                 required: true
             }
@@ -38,7 +45,7 @@
             click () {
                 if(this.options.length > 0)
                 {
-                    this.open = !this.open
+                    this.isOpen = !this.isOpen
                 }
             },
             close () {
@@ -54,9 +61,9 @@
                 get () {
                     if (!this.isOpen) {
                         if (this.value) {
-                            return this.options.find(option => {
-                                return option.value === this.value
-                            }).nome
+                            return this.options[this.values.findIndex(v => {
+                                return v === this.value
+                            })]
                         } else {
                             return this.label
                         }
@@ -72,7 +79,7 @@
                 if (!this.searchValue) return this.options
                 else {
                     return this.options.filter((option) => {
-                        return option.nome.toLowerCase().includes(this.searchValue.toLowerCase())
+                        return option.toLowerCase().includes(this.searchValue.toLowerCase())
                     })
                 }
             }
@@ -82,21 +89,28 @@
 
 <style scoped>
     /* Corpo do select */
+    input:focus {
+        outline: none;
+    }
     .select-box {
         background: #fff;
         display: flex;
         flex-flow: column;
         align-items: center;
         position: relative;
+        padding: 0 5px;
+        height: 100%;
+        width: 100%;
     }
     .select-label {
         height: 100%;
         width: 100%;
-        padding-left: 10px;
         display: inline-flex;
         align-items: center;
         cursor: pointer;
         min-height: 25px;
+        border: none;
+        font-size: 15px;
     }
     .select-options {
         width: 100%;
