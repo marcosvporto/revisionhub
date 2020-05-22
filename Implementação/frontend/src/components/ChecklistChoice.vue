@@ -45,6 +45,7 @@
     #main-text
     {
         font-size: 50px;
+        font-weight: bold;
         white-space: nowrap;
         margin-bottom: 20px;
     }
@@ -77,6 +78,8 @@
         color: var(--dark);
         background-color: var(--light);
         height:100%;
+        font-weight: 400;
+        font-size: 20px;
     }
 
     .main-container

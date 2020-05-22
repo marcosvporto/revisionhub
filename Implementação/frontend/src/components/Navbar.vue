@@ -1,7 +1,7 @@
 <template>
     <nav>
         <div class="navbar-title">
-            <img src="../assets/img/placeholder.png" width="90" height="100" alt="Icone">
+            <img src="../assets/img/rev-hub-icon.svg" width="90" height="100" alt="Icone">
             <span class="title-text"><slot></slot></span>
         </div>
 
@@ -34,8 +34,8 @@
     }
     .title-text
     {
-        font-weight: 500;
-        font-size: 23px;
+        font-weight: 300;
+        font-size: 25px;
     }
     .button-group
     {
@@ -48,6 +48,7 @@
         border-radius: 5px;
         font-size: 17px;
         color: white;
+        font-weight: 400;
     }
     #listButton
     {
