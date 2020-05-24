@@ -1,5 +1,5 @@
 <template>
-    <div id="picker-container">
+    <div id="picker-container" class="flex-row">
         <span>{{(pickedDocument)?pickedDocument.name : ""}}</span>
         <label for="file-upload">
             <i class="far fa-folder-open"></i>
@@ -20,7 +20,6 @@
         {
             selectDocument(event)
             {
-                console.log(event)
                 let files = event.target.files
                 if(files && files.length)
                 {
@@ -46,8 +45,6 @@
         min-height: 50px;
         color: black;
         border: var(--light) solid 5px;
-        display:flex;
-        flex-direction: row;
         align-items: center;
     }
     #picker-container > span

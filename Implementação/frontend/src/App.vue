@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="flex-column">
         <navbar>RevisionHub</navbar>
         <router-view id="router-view">
         </router-view>
@@ -26,16 +26,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
     #app {
-        display: flex;
-        flex-direction: column;
         height: 100vh;
         width: 100vw;
-        min-width: max-content;
+        min-width: 1000px;
     }
 
     #router-view {
         flex: 1 1 auto;
-        min-width: max-content;
         width: 100%;
     }
 </style>

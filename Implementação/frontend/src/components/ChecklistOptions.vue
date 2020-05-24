@@ -1,9 +1,9 @@
 <template>
-    <div class="select-box" v-click-outside="close">
-        <input @click.self="click()" class="select-label" v-model="currentLabel"
+    <div id="select-box" v-click-outside="close">
+        <input @click.self="click()" id="select-label" class="flex-grow" v-model="currentLabel"
                :style="(currentLabel === label)?'color:var(--light)':''"/>
-        <i @click.self="click()" class="fas fa-caret-down caret-icon"></i>
-        <div class="select-options" v-show="isOpen">
+        <i @click.self="click()" id="caret-icon" class="fas fa-caret-down flex-shrink"></i>
+        <div id="select-options" v-show="isOpen">
             <checklistItem
                     v-for="(option,index) in currentOptions"
                     :key="index"
@@ -95,7 +95,7 @@
         outline: none;
     }
 
-    .select-box {
+    #select-box {
         background: #fff;
         display: flex;
         flex-flow: row;
@@ -106,8 +106,7 @@
         width: 100%;
     }
 
-    .select-label {
-        flex: 1 1 auto;
+    #select-label {
         height: 90%;
         display: inline-flex;
         align-items: center;
@@ -117,7 +116,7 @@
         font-size: 15px;
     }
 
-    .select-options {
+    #select-options {
         width: 100%;
         height: fit-content;
         z-index: 100;
@@ -130,8 +129,7 @@
         box-shadow: 0 0 1px 1px #ddd;
     }
 
-    .caret-icon {
-        flex: 0 0 auto;
+    #caret-icon {
         color:black;
         cursor:pointer;
         height: 100%;

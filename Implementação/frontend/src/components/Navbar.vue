@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="flex-row">
         <div class="navbar-title">
             <img src="../assets/img/rev-hub-icon.svg" width="90" height="100" alt="Icone">
             <span class="title-text">
@@ -28,8 +28,6 @@
 <style scoped>
     nav
     {
-        display:flex;
-        flex-direction: row;
         align-items: center;
         justify-content: space-between;
     }

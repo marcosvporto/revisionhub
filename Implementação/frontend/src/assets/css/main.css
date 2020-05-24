@@ -26,6 +26,7 @@ body {
     overflow-y:auto;
 }
 
+/* Classes de cores */
 .bg-dark
 {
     background-color: var(--dark);
@@ -49,4 +50,26 @@ body {
 .bg-red
 {
     background-color: var(--red);
+}
+
+/* Classed de Display */
+.flex-column
+{
+    display:flex;
+    flex-direction: column;
+}
+.flex-row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-grow
+{
+    flex:1 1 auto;
+}
+
+.flex-shrink
+{
+    flex:0 0 auto;
 }

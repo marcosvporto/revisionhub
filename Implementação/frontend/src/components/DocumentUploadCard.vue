@@ -6,10 +6,10 @@
                 RevHub
                 <span id="card-reason">Upload</span>
             </div>
-            <div id="card-body">
+            <div id="card-body" class="flex-column">
                 <span>Selecione um arquivo pdf:</span>
                 <picker @change="selectedDocument=$event"/>
-                <div id="button-group">
+                <div id="button-group" class="flex-row">
                     <button id="button-ok" class="bg-light-green" @click="submit">Ok</button>
                     <button id="button-cancel" class="bg-red" @click="$emit('close')">Cancelar</button>
                 </div>
@@ -102,8 +102,6 @@
         width: 100%;
         height: 60%;
         padding:20px;
-        display: flex;
-        flex-direction: column;
     }
     #card-body > span
     {
@@ -114,8 +112,6 @@
     }
     #button-group
     {
-        display: flex;
-        flex-direction: row;
         justify-content: space-between;
         padding: 10px 30px;
         margin-top:auto;
