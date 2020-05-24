@@ -2,12 +2,18 @@
     <nav>
         <div class="navbar-title">
             <img src="../assets/img/rev-hub-icon.svg" width="90" height="100" alt="Icone">
-            <span class="title-text"><slot></slot></span>
+            <span class="title-text">
+                <slot name="default"></slot>
+            </span>
         </div>
-
+        <div>
+            <span class="title-text">
+                <slot name="highlighted-text"></slot>
+            </span>
+        </div>
         <div class="button-group">
-            <button id="listButton">Minhas Listas</button>
-            <button id="logButton">Registrar</button>
+            <button id="listButton" class="bg-light">Minhas Listas</button>
+            <button id="logButton" class="bg-light-green">Registrar</button>
         </div>
 
     </nav>
@@ -29,6 +35,7 @@
     }
     .navbar-title
     {
+        margin-left: 10px;
         display: flex;
         align-items: center;
     }
@@ -49,15 +56,7 @@
         font-size: 17px;
         color: white;
         font-weight: 400;
-    }
-    #listButton
-    {
-        background-color: var(--light);
-        border: none;
-    }
-    #logButton
-    {
-        background-color: var(--light-green);
+        cursor: pointer;
         border: none;
     }
 </style>

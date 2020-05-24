@@ -8,16 +8,20 @@
         </div>
         <div id="select-container">
             <checklist-opcoes class="select-box" :options="optionsMock" :values="values" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
-            <button>Go</button>
+            <button @click="selectChecklist" class="bg-light">Go</button>
         </div>
 
     </div>
 </template>
 
 <script>
-    import CheckListOpcoes from './ChecklistOpcoes'
+    import CheckListOpcoes from './ChecklistOptions'
     export default {
         name: "ChecklistChoice",
+        components:
+        {
+            'checklist-opcoes': CheckListOpcoes
+        },
         data: function() {
             return {
                 optionsMock: ['Teste1','Teste2','Checklist Teste'],
@@ -25,10 +29,15 @@
                 selectedChecklist: null
             };
         },
-
-        components:
+        methods:
         {
-            'checklist-opcoes': CheckListOpcoes
+            selectChecklist()
+            {
+                if(this.selectedChecklist !== null)
+                {
+                    this.$router.push({name:"View",params: { checklistId: this.selectedChecklist }},)
+                }
+            }
         }
     }
 </script>
@@ -76,10 +85,10 @@
         border-bottom-right-radius: 8px;
         border: none;
         color: var(--dark);
-        background-color: var(--light);
         height:100%;
         font-weight: 400;
         font-size: 20px;
+        cursor: pointer;
     }
 
     .main-container
