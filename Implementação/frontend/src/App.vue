@@ -36,5 +36,6 @@
     #router-view {
         flex: 1 1 auto;
         min-width: max-content;
+        width: 100%;
     }
 </style>
