@@ -22,8 +22,7 @@ body {
     margin: 0;
     background-color: var(--dark);
     min-width: 500px;
-    overflow-x:hidden;
-    overflow-y:auto;
+    overflow: auto;
 }
 
 /* Classes de cores */

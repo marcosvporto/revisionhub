@@ -168,5 +168,6 @@
         border-right: var(--light) solid;
         min-width: 500px;
         overflow: auto;
+        margin-right:15px;
     }
 </style>
