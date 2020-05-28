@@ -118,7 +118,8 @@
 
     #select-options {
         width: 100%;
-        height: fit-content;
+        height: 300px;
+        overflow: auto;
         z-index: 100;
         position: absolute;
         top: 100%;

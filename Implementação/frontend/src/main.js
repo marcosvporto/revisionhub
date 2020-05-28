@@ -11,7 +11,7 @@ const routes = [
   {path:'/',alias:'/choose',name:'Choice',component:ChecklistChoice},
   {path:'/create',name:'Create',component:ChecklistCreate},
   {path:'/login',name:'Login',component:Login},
-  {path:'/view/:checklistId',name:'View',component:ChecklistView}
+  {path:'/view/:checklistId',name:'View',component:ChecklistView,props:true}
 ]
 
 

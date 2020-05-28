@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container flex-column">
+    <div class="main-container flex-column fill-screen">
         <div id="text-box">
             <div id="main-text">Descubra Checklists</div>
             <div id="secondary-text">
@@ -24,8 +24,7 @@
         },
         data: function() {
             return {
-                optionsMock: ['Teste1','Teste2','Checklist Teste'],
-                values: [1,2,3],
+                optionsMock: ['Teste1','Teste2','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste',],
                 selectedChecklist: null
             };
         },
@@ -38,6 +37,14 @@
                     this.$router.push({name:"View",params: { checklistId: this.selectedChecklist }},)
                 }
             }
+        },
+        computed:
+        {
+            values()
+            {
+                return this.optionsMock.map((x,index)=>index)
+            }
+
         }
     }
 </script>

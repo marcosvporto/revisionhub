@@ -4,6 +4,8 @@
                      @submit="selectDocument($event)"
                      @close="picking=false"
         />
+        <export-card v-if="exporting" @export="exportDocument($event)" @close="exporting=false" />
+        <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)" />
         <div id="checklist-info" class="flex-column flex-shrink">
             <span id="checklist-title">{{tituloMockado}}</span>
             <span id="checklist-description">Likes: {{numLikesMockado}}</span>
@@ -11,7 +13,7 @@
         <div id="checklist-container" class="flex-column flex-grow">
             <div id="checklist-actions" class="flex-row flex-shrink">
                 <i class="fas fa-plus-circle" @click="picking=true"/>
-                <button class="bg-blue">Export</button>
+                <button class="bg-blue" @click="exporting=true">Export</button>
             </div>
             <div id="checklist-body" class="flex-row flex-grow" ref="page">
                 <div id="checklist-document" >
@@ -33,6 +35,8 @@
 <script>
     import pdf from 'vue-pdf'
     import DocumentUploadCard from "@/components/DocumentUploadCard";
+    import DocumentExportCard from "@/components/DocumentExportCard";
+    import DocumentLikeCard from "@/components/DocumentLikeCard";
     import Checklist from "@/components/Checklist";
 
     export default {
@@ -40,6 +44,8 @@
         components: {
             pdf,
             'upload-card': DocumentUploadCard,
+            'export-card': DocumentExportCard,
+            'like-card': DocumentLikeCard,
             'checklist': Checklist
         },
         props:
@@ -49,6 +55,8 @@
         data: function () {
             return {
                 picking: false,
+                exporting: false,
+                liking:false,
                 tituloMockado: "Checklist 1",
                 checklistMockado: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue nibh sit amet sapien pharetra, at luctus nulla pharetra. Nulla vehicula mattis massa quis imperdiet. Proin porttitor hendrerit odio, ut consequat ipsum elementum quis. Suspendisse potenti. Phasellus posuere tempus accumsan. In varius, justo id eleifend auctor, lorem odio aliquet nisi, dignissim vestibulum arcu erat nec metus. Nunc ornare tempor enim, eu egestas odio. Morbi non sollicitudin ante, ut auctor urna. Nunc interdum sodales tincidunt. Suspendisse volutpat tortor nec efficitur consequat. Morbi dolor magna, vehicula laoreet rutrum ut, convallis sed neque. Integer eu tincidunt quam, a finibus lorem.',
                     'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta','Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta',
@@ -74,6 +82,18 @@
                 if (page && document) {
                     page.style.height = (document.$el.clientHeight + 50).toString() + 'px'
                 }
+            },
+            exportDocument()
+            {
+                this.liking = true
+            },
+            endReview(like)
+            {
+                if(like)
+                {
+                    console.log(like)
+                }
+                this.$router.push('/')
             }
         },
         computed:
