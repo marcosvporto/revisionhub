@@ -10,7 +10,10 @@
                     @click.native="clickOption(values[index])"
                     v-show="currentOptions.length>0"
             >
-                <template v-slot:label>{{option}}</template>
+                <template v-slot:label>
+                    <span id="option-title">{{option}}</span>
+                    <span id="option-likes">Likes:{{likes[index]}}</span>
+                </template>
             </checklistItem>
         </div>
     </div>
@@ -31,6 +34,10 @@
                 type: Array
             },
             values: {
+                required: true,
+                type: Array
+            },
+            likes: {
                 required: true,
                 type: Array
             },
@@ -62,7 +69,7 @@
             currentLabel: {
                 get() {
                     if (!this.isOpen) {
-                        if (this.value) {
+                        if (this.value !== null) {
                             return this.options[this.values.findIndex(v => {
                                 return v === this.value
                             })]
@@ -90,11 +97,6 @@
 </script>
 
 <style scoped>
-    /* Corpo do select */
-    input:focus {
-        outline: none;
-    }
-
     #select-box {
         background: #fff;
         display: flex;
@@ -118,7 +120,7 @@
 
     #select-options {
         width: 100%;
-        height: 300px;
+        max-height: 300px;
         overflow: auto;
         z-index: 100;
         position: absolute;
@@ -128,6 +130,14 @@
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
         box-shadow: 0 0 1px 1px #ddd;
+    }
+
+    #option-likes
+    {
+        margin-left:auto;
+        margin-right: 5px;
+        color: var(--light-green);
+        font-size: small;
     }
 
     #caret-icon {

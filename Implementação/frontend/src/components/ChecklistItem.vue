@@ -1,6 +1,6 @@
 <template>
-    <div class="option-box">
-        <span class="option-label">
+    <div id="option-box">
+        <span id="option-label">
             <slot name="label"></slot>
         </span>
     </div>
@@ -14,7 +14,7 @@
 
 <style scoped>
     /* Corpo da opção */
-    .option-box{
+    #option-box{
         border-bottom: 1px #bbb solid;
         background: #fff;
         display:flex;
@@ -22,11 +22,14 @@
         cursor:pointer;
         padding: 8px 10px;
     }
-    .option-box:hover {
+    #option-box:hover {
         background: var(--light)
     }
-    .option-label {
+    #option-label {
         color: var(--dark);
         width:100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 </style>

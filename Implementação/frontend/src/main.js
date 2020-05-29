@@ -4,12 +4,15 @@ import App from './App.vue'
 import ChecklistChoice from './components/ChecklistChoice'
 import ChecklistCreate from './components/ChecklistCreate'
 import ChecklistView from './components/ChecklistView'
+import ChecklistMyChecklists from "@/components/ChecklistMyChecklists";
 import Login from './components/Login'
 import clickoutisde from './diretivas/click-outside'
 
+
 const routes = [
   {path:'/',alias:'/choose',name:'Choice',component:ChecklistChoice},
-  {path:'/create',name:'Create',component:ChecklistCreate},
+  {path:'/mychecklists',name:'MyChecklists',component:ChecklistMyChecklists},
+  {path:'/create',name:'Create',component:ChecklistCreate,props:true},
   {path:'/login',name:'Login',component:Login},
   {path:'/view/:checklistId',name:'View',component:ChecklistView,props:true}
 ]

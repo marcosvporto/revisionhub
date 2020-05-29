@@ -7,7 +7,7 @@
             </div>
         </div>
         <div id="select-container" class="flex-row">
-            <checklist-opcoes class="select-box flex-grow" :options="optionsMock" :values="values" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
+            <checklist-opcoes class="select-box flex-grow" :options="optionsMock" :values="values" :likes="likes" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
             <button @click="selectChecklist" class="bg-light flex-shrink">Go</button>
         </div>
 
@@ -43,8 +43,11 @@
             values()
             {
                 return this.optionsMock.map((x,index)=>index)
+            },
+            likes()
+            {
+                return this.optionsMock.map((x,index)=>index)
             }
-
         }
     }
 </script>

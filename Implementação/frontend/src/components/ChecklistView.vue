@@ -6,14 +6,18 @@
         />
         <export-card v-if="exporting" @export="exportDocument($event)" @close="exporting=false" />
         <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)" />
-        <div id="checklist-info" class="flex-column flex-shrink">
-            <span id="checklist-title">{{tituloMockado}}</span>
+        <div class="flex-column flex-shrink checklist-info">
+            <span class="checklist-title">{{tituloMockado}}</span>
             <span id="checklist-description">Likes: {{numLikesMockado}}</span>
         </div>
         <div id="checklist-container" class="flex-column flex-grow">
             <div id="checklist-actions" class="flex-row flex-shrink">
                 <i class="fas fa-plus-circle" @click="picking=true"/>
-                <button class="bg-blue" @click="exporting=true">Export</button>
+                <div>
+                    <button class="bg-blue" @click="exporting=true">Export</button>
+                    <button class="bg-blue" @click="liking=true">Finalizar</button>
+                </div>
+
             </div>
             <div id="checklist-body" class="flex-row flex-grow" ref="page">
                 <div id="checklist-document" >
@@ -117,17 +121,6 @@
 </script>
 
 <style scoped>
-    #checklist-info {
-        margin-top: -80px;
-        padding-bottom: 100px;
-        pointer-events: none;
-    }
-
-    #checklist-title {
-        font-size: 40px;
-        font-weight: 300;
-    }
-
     #checklist-description {
         font-weight: lighter;
         color: var(--light-green)
@@ -151,17 +144,14 @@
         cursor: pointer;
     }
 
-    #checklist-actions > button {
+    #checklist-actions > div > button {
         font-size: 15px;
         color: white;
         padding: 8px 30px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-    }
-
-    #checklist-actions > button:focus {
-        outline: none;
+        margin-right: 10px;
     }
 
     #checklist-body {

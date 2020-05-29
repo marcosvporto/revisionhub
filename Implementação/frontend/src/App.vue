@@ -29,6 +29,7 @@
         width: 100vw;
         min-width: 1000px;
         overflow: hidden;
+        min-height: 100vh;
     }
 
     #router-view {
