@@ -39,7 +39,7 @@
         background-color: transparent;
         width: 100vw;
         height: 100vh;
-        z-index: 9000;
+        z-index: 100;
         backdrop-filter: blur(1px);
     }
     #card-container
@@ -53,7 +53,7 @@
         margin: auto;
         width: 400px;
         height: 300px;
-        z-index: 99999;
+        z-index: 200;
         background-color: white;
         box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }

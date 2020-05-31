@@ -15,7 +15,25 @@
         name: 'App',
         components: {
             'navbar': Navbar
+        },
+        watch:
+        {
+            $route:
+            {
+                handler: function(to)
+                {
+
+                    const protectedRoutes = ['MyChecklists','Create']
+                    if(protectedRoutes.indexOf(to.name) >=0 && !this.isConnected)
+                    {
+                        this.$router.push('/')
+                        this.$alert('Você deve estar logado para acessar essa rota')
+                    }
+                },
+                immediate: true
+            }
         }
+
     }
 </script>
 

@@ -13,20 +13,31 @@
             </span>
         </div>
         <div class="button-group">
-            <button id="listButton" class="bg-light rounded-button" @click="$router.push('MyChecklists')">Minhas Listas</button>
-            <button id="logButton" class="bg-light-green rounded-button" @click="loginOpen=true">Registrar</button>
+            <button v-if="isConnected" id="listButton" class="bg-light rounded-button"
+                    @click="$router.push('MyChecklists')">Minhas Listas
+            </button>
+            <button v-if="isConnected" id="unlogButton" class="bg-red rounded-button" @click="disconnect()">
+            Logout
+            </button>
+            <button v-if="!isConnected" id="logButton" class="bg-light-green rounded-button" @click="loginOpen=true">
+                Login/Registrar
+            </button>
+
         </div>
     </nav>
 </template>
 
 <script>
     import Login from "@/components/Login";
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
+
     export default {
         name: "Navbar",
+        mixins: [ConnectionMixin],
         components:
-        {
-            'login':Login
-        },
+            {
+                'login': Login
+            },
         data() {
             return {
                 loginOpen: false
@@ -34,8 +45,7 @@
         },
         methods:
         {
-            returnHome()
-            {
+            returnHome() {
                 this.$router.push('/')
             }
         }
@@ -43,25 +53,24 @@
 </script>
 
 <style scoped>
-    nav
-    {
+    nav {
         align-items: center;
         justify-content: space-between;
     }
-    .navbar-title
-    {
+
+    .navbar-title {
         margin-left: 10px;
         display: flex;
         align-items: center;
         cursor: pointer;
     }
-    .title-text
-    {
+
+    .title-text {
         font-weight: 300;
         font-size: 25px;
     }
-    .button-group > button
-    {
+
+    .button-group > button {
         margin: 10px 15px;
         padding: 12px 20px;
         font-size: 17px;

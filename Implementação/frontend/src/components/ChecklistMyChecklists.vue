@@ -6,11 +6,11 @@
             </span>
         </div>
         <div id="page-body" class="flex-grow bg-white flex-column">
-            <button class="bg-light-green rounded-button">Create</button>
+            <button class="bg-light-green rounded-button" @click="createChecklist">Create</button>
             <div id="body-container" class="flex-column">
                 <span id="select-label" class="flex-shrink">Administre suas checklists aqui</span>
                 <div id="select-container" class="flex-row flex-grow">
-                    <checklist-options class="select-box" :options="['Teste']" :values="[1]" :likes="[5]" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-options>
+                    <checklist-options class="select-box" :options="options" :values="values" :likes="likes" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-options>
                     <button class="bg-white rounded-button" :class="(selectedChecklist!=null)?'enabled-edit':'disabled-edit'" @click="editChecklist">Editar</button>
                 </div>
             </div>
@@ -20,15 +20,18 @@
 
 <script>
     import ChecklistOptions from "@/components/ChecklistOptions";
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
     export default {
         name: "ChecklistMyChecklists",
         components:
         {
             'checklist-options':ChecklistOptions
         },
+        mixins: [ConnectionMixin],
         data:function() {
             return {
-                selectedChecklist: null
+                selectedChecklist: null,
+                checklists: []
             };
         },
         methods: {
@@ -38,7 +41,56 @@
                 {
                     this.$router.push({name:'Create',params:{ checklistId:this.selectedChecklist }})
                 }
+            },
+            createChecklist()
+            {
+                this.$router.push({name:'Create',params:{ checklistId:this.selectedChecklist }})
             }
+        },
+        computed: {
+            options()  {
+
+                return this.checklists.map(x => {
+                    return x.title
+                })
+            },
+            likes() {
+                return this.checklists.map(x => {
+                    return x.likes
+                })
+            },
+            values() {
+                return this.checklists.map(x => {
+                    return x.value
+                })
+            }
+        },
+        async mounted()
+        {
+            let connection
+            try {
+                connection = this.getAuthenticatedRoute()
+            } catch(error) {
+                console.log(error)
+                await this.$router.push('/')
+                return
+            }
+            let response
+            try {
+                response =  await connection.get('/checklists/'+this.getUserId())
+            } catch(e) {
+                if(e.response)
+                {
+                    await this.$alert(e.response.data.message)
+                }
+                else
+                {
+                    await this.$alert(e)
+                }
+                await this.$router.push('/')
+                return
+            }
+            this.checklists = response.data
         }
     }
 </script>

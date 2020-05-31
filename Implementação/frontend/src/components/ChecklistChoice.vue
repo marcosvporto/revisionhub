@@ -7,7 +7,7 @@
             </div>
         </div>
         <div id="select-container" class="flex-row">
-            <checklist-opcoes class="select-box flex-grow" :options="optionsMock" :values="values" :likes="likes" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
+            <checklist-opcoes class="select-box flex-grow" :options="options" :values="values" :likes="likes" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
             <button @click="selectChecklist" class="bg-light flex-shrink">Go</button>
         </div>
 
@@ -16,15 +16,17 @@
 
 <script>
     import CheckListOpcoes from './ChecklistOptions'
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
     export default {
         name: "ChecklistChoice",
         components:
         {
             'checklist-opcoes': CheckListOpcoes
         },
+        mixins: [ConnectionMixin],
         data: function() {
             return {
-                optionsMock: ['Teste1','Teste2','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste','Checklist Teste',],
+                checklists: [],
                 selectedChecklist: null
             };
         },
@@ -40,14 +42,28 @@
         },
         computed:
         {
-            values()
-            {
-                return this.optionsMock.map((x,index)=>index)
+            options()  {
+
+                return this.checklists.map(x => {
+                    return x.title
+                })
             },
-            likes()
-            {
-                return this.optionsMock.map((x,index)=>index)
+            likes() {
+                return this.checklists.map(x => {
+                    return x.likes
+                })
+            },
+            values() {
+                return this.checklists.map(x => {
+                    return x.value
+                })
             }
+        },
+        mounted()
+        {
+            let connection = this.getUnauthenticatedRoute()
+            console.log(connection)
+
         }
     }
 </script>
