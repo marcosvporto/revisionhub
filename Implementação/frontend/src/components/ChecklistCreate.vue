@@ -1,15 +1,17 @@
 <template>
     <div class="flex-column">
         <div class="checklist-info">
-            <input id="title-input" class="checklist-title" v-model="mockedTitle"/>
+            <input id="title-input" class="checklist-title" v-model="checklist.title"/>
         </div>
         <div id="page-body" class="flex-grow bg-white flex-column">
             <div id="button-group" class="flex-row">
                 <i id="add-button" class="fas fa-plus-circle" @click="addCheck"/>
-                <button id="save-button" class="rounded-button bg-light-green flex-shrink" @click="saveChecklist">Save</button>
+                <button id="save-button" class="rounded-button bg-light-green flex-shrink" @click="saveChecklist">Save
+                </button>
             </div>
             <transition-group name="checklist" id="check-container" class="flex-grow flex-column" tag="div">
-                <check-edit class="checklist-item" v-for="(check,index) in mockedChecklist" v-model="mockedChecklist[index]" :key="values[index]" @remove="removeCheck(index)"/>
+                <check-edit class="checklist-item" v-for="(check,index) in checks" v-model="checks[index].text"
+                            :key="checks[index]['check_id']" @remove="removeCheck(index)"/>
             </transition-group>
         </div>
     </div>
@@ -17,42 +19,164 @@
 
 <script>
     import CheckEdit from "@/components/CheckEdit";
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
+
     export default {
         name: "ChecklistCreate",
+        mixins: [ConnectionMixin],
         components:
-        {
-            'check-edit': CheckEdit
-        },
+            {
+                'check-edit': CheckEdit
+            },
         props:
-        {
-            checklistId: {
-                require: false,
-                type: Number
-            }
-        },
-        data: function()
-        {
+            {
+                checklist: {
+                    require: false,
+                    type: Object,
+                    default: function () {
+                        return {
+                            title: 'Titulo da sua checklist',
+                            id: -1
+                        }
+                    }
+                }
+            },
+        data: function () {
             return {
-                mockedTitle: 'Checklist Teste',
-                mockedChecklist: ['Check1','Check2','Check Test','Check Test','Check Test','Check Test','Check Test','Check Test','Check Test','Check Test'],
-                values: [1,2,3,4,5,6,7,8,9,10]
+                checks: [],
+                authenticatedConnection: null,
+                added: [],
+                edited: [],
+                removed: []
             }
         },
         methods:
-        {
-            addCheck()
             {
-                this.mockedChecklist.unshift("")
-                this.values.unshift(this.values.length+1)
+                addCheck() {
+                    let check = {
+                        text: '',
+                        check_id: this.checks.length
+                    }
+                    this.checks.push(check)
+                    this.added.push(check)
+                },
+                removeCheck(index) {
+                    let removed = this.checks.splice(index, 1)
+                    this.removed.push(removed)
+                },
+                async saveChecklist() {
+                    if(this.checklist.id === -1)
+                    {
+                        let response
+                        try
+                        {
+                            response = await this.authenticatedConnection.post('/checklists',{
+                                title: this.checklist.title
+                            })
+                        } catch(e)
+                        {
+                            if (e.response) {
+                                await this.$alert(e.response.data.message)
+                            } else {
+                                await this.$alert(e)
+                            }
+                            return
+                        }
+                        this.checklist.id = response.data.id
+                    }
+
+                    for(let check of this.added)
+                    {
+                        let response
+                        try {
+                            response = await this.authenticatedConnection.post('/checklists/' + this.checklistId + '/checks/', {
+                                text: check.text
+                            })
+                        } catch(e)
+                        {
+                            if (e.response) {
+                                await this.$alert(e.response.data.message)
+                            } else {
+                                await this.$alert(e)
+                            }
+                            return
+                        }
+                        check.check_id = response.data['check_id']
+                    }
+                    for(let check of this.removed)
+                    {
+                        if(this.added.indexOf(check) >= 0)
+                        {
+                            continue
+                        }
+                        try {
+                            await this.authenticatedConnection.delete('/checklists/' + this.checklistId + '/checks/' + check.check_id)
+                        } catch(e)
+                        {
+                            if (e.response) {
+                                await this.$alert(e.response.data.message)
+                            } else {
+                                await this.$alert(e)
+                            }
+                            return
+                        }
+                    }
+                    for(let check of this.edited)
+                    {
+                        if(this.added.indexOf(check) >= 0 || this.removed.indexOf(check) >= 0)
+                        {
+                            continue
+                        }
+                        try {
+                            await this.authenticatedConnection.put('/checklists/' + this.checklistId + '/checks/' + check.check_id, {
+                                text: check.text
+                            })
+                        } catch(e)
+                        {
+                            if (e.response) {
+                                await this.$alert(e.response.data.message)
+                            } else {
+                                await this.$alert(e)
+                            }
+                            return
+                        }
+                    }
+                    this.added = []
+                    this.removed = []
+                    this.edited = []
+
+                    await this.$alert('Salvo com sucesso')
+                }
             },
-            removeCheck(index)
-            {
-                this.mockedChecklist.splice(index,1)
-                this.values.splice(index,1)
-            },
-            saveChecklist()
-            {
-                this.$router.push({name:'MyChecklists'})
+        async mounted() {
+            let connection
+            try {
+                connection = this.getAuthenticatedRoute()
+            } catch (error) {
+                console.log(error)
+                await this.$router.push('/')
+                return
+            }
+            this.authenticatedConnection = connection
+
+
+            if (this.checklist.id !== null) {
+
+
+                let response
+                /* Requisitando checks */
+                try {
+                    response = await connection.get('/checklists/' + this.checklistId + '/checks')
+                } catch (e) {
+                    if (e.response) {
+                        await this.$alert(e.response.data.message)
+                    } else {
+                        await this.$alert(e)
+                    }
+                    await this.$router.push('/')
+                    return
+                }
+                this.checks = response.data
             }
         }
 
@@ -60,54 +184,55 @@
 </script>
 
 <style scoped>
-    #title-input
-    {
+    #title-input {
         pointer-events: all;
         text-align: center;
         background-color: var(--light);
         border: none;
     }
-    #page-body
-    {
+
+    #page-body {
         height: 69vh;
     }
-    #button-group
-    {
+
+    #button-group {
         align-items: center;
     }
-    #save-button
-    {
+
+    #save-button {
         padding: 13px 50px;
         font-size: 17px;
         color: white;
         font-weight: 400;
         margin-right: 50px;
         margin-left: auto;
-        margin-top:1%;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        margin-top: 1%;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     }
-    #add-button
-    {
+
+    #add-button {
         color: var(--light-green);
         font-size: 60px;
         cursor: pointer;
         margin-left: 50px;
     }
-    #check-container
-    {
-        margin-top:50px;
+
+    #check-container {
+        margin-top: 50px;
         padding: 0 50px;
         align-items: center;
         overflow: auto;
     }
+
     /* Transições */
-    .checklist-item
-    {
+    .checklist-item {
         width: 100%;
     }
+
     .checklist-enter-active, .checklist-leave-active {
         transition: all 0.5s;
     }
+
     .checklist-enter, .checklist-leave-to {
         opacity: 0;
     }

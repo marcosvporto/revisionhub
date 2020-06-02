@@ -39,12 +39,12 @@
             {
                 if(this.selectedChecklist != null)
                 {
-                    this.$router.push({name:'Create',params:{ checklistId:this.selectedChecklist }})
+                    this.$router.push({name:'Create',params:{ checklist:this.checklists.find(x => x.id == this.selectedChecklist) }})
                 }
             },
             createChecklist()
             {
-                this.$router.push({name:'Create',params:{ checklistId:this.selectedChecklist }})
+                this.$router.push({name:'Create',params:{ checklist:null }})
             }
         },
         computed: {
@@ -61,7 +61,7 @@
             },
             values() {
                 return this.checklists.map(x => {
-                    return x.value
+                    return x.id
                 })
             }
         },
