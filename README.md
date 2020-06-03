@@ -1,7 +1,7 @@
 
 
-
-# RevisionHub
+![RevHub](https://user-images.githubusercontent.com/39508000/83695414-608f3500-a5d0-11ea-8c79-d296403249ee.png)
+# RevisionHub 
 RevisionHub é um hub de Checklists que atendem a processos de inspeção (Fagan, 1976).
 
 ## Descrição
@@ -39,28 +39,6 @@ Nós do grupo Grupo 1, deliberamos que para a consecução de tal projeto, o fra
 ## Requisitos de Projeto
 
 - O código do projeto deve estar versionado do github.
-
-
-
-## Timeline
-
-- [X] 14/05: Terminar primeiro documento de requisitos e timeline
-- [X] 14/05: Fazer Gantt Chart para timeline
-- [X] 14/05: Dividir Tarefas
-- [X] 14/05: Realizar primeira inspeção de Requisitos
-- [X] 26/05: Terminar documento de projeto e Arquitetura
-- [X] 26/05: Terminar inspeção de documento de projeto
-- [ ] 26/05: Fazer sistema e página de login
-- [ ] 26/05: Fazer uma de todos os artefatos
-- [ ] 04/06: Terminar documentos de planejamento de testes
-- [ ] 04/06: Implementar C.R.U.D. e busca de listas de inspeção no backend
-- [ ] 23/06: Terminar listagem dos casos de teste
-- [ ] 23/06: Fazer sistema de gerenciamento de inspeções
-- [ ] 23/06: Fazer sistema de gerenciamento de transeuntes
-- [ ] 23/06: Inspecionar e testar a implementação até o momento
-- [ ] 02/07: Fazer slideshow de apresentação
-- [ ] 02/07: Finalizar pendências de outras fases
-- [ ] 02/07: Testes finais
 
 
 ## Contribuições
