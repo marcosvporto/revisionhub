@@ -1,6 +1,6 @@
 # FrontEnd do Revisionhub
 
-## Setup do FrontEnd (comando executado nessa parte)
+## Setup do FrontEnd (comando executado nessa pasta)
 ```
 npm install
 ```
