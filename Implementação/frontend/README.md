@@ -1,8 +1,13 @@
 # FrontEnd do Revisionhub
+Requisitos: node, npm
+## Pre-setup
+```
+npm install yarn
+```
 
 ## Setup do FrontEnd (comando executado nessa pasta)
 ```
-npm install
+yarn install
 ```
 
 ### Compilação para rodar em desenvolvimento
