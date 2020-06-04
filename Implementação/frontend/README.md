@@ -1,24 +1,16 @@
-# frontend
+# FrontEnd do Revisionhub
 
-## Project setup
+## Setup do FrontEnd (comando executado nessa parte)
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compilação para rodar em desenvolvimento
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+yarn run serve
 ```
 
-### Lints and fixes files
+### Compilação para rodar em produção
 ```
-npm run lint
+yarn run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
