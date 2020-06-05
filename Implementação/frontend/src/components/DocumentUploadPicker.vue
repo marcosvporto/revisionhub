@@ -11,44 +11,38 @@
 <script>
     export default {
         name: "DocumentUploadPicker",
-        data: function() {
+        data: function () {
             return {
                 pickedDocument: null
             }
         },
         methods:
-        {
-            selectDocument(event)
             {
-                let files = event.target.files
-                if(files && files.length)
-                {
-                    if(files[0].type !== "application/pdf")
-                    {
-                        alert("O tipo de arquivo deve ser PDF")
-                    }
-                    else
-                    {
-                        this.pickedDocument = files[0]
-                        this.$emit('change',files[0])
-                    }
+                selectDocument(event) {
+                    let files = event.target.files
+                    if (files && files.length) {
+                        if (files[0].type !== "application/pdf") {
+                            alert("O tipo de arquivo deve ser PDF")
+                        } else {
+                            this.pickedDocument = files[0]
+                            this.$emit('change', files[0])
+                        }
 
+                    }
                 }
             }
-        }
     }
 </script>
 
 <style scoped>
-    #picker-container
-    {
+    #picker-container {
         min-height: 50px;
         color: black;
         border: var(--light) solid 5px;
         align-items: center;
     }
-    #picker-container > span
-    {
+
+    #picker-container > span {
         width: 90%;
         text-align: left;
         padding-left: 3px;
@@ -56,8 +50,8 @@
         white-space: nowrap;
         overflow: hidden;
     }
-    #picker-container > label
-    {
+
+    #picker-container > label {
         cursor: pointer;
     }
 </style>

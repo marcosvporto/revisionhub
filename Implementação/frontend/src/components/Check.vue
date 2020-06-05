@@ -24,57 +24,56 @@
         props: {
             index: Number,
         },
-        data: function() {
+        data: function () {
             return {
-                    state: false
+                state: false
             };
         }
     }
 </script>
 
 <style scoped>
-    #check-container
-    {
+    #check-container {
         height: 100px;
         width: 100%;
         align-items: center;
         margin-bottom: 12px;
     }
-    #check-body
-    {
+
+    #check-body {
         padding: 20px;
         align-items: start;
         /* Sombra suave */
-        box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
         height: 100%;
-        color:var(--blue);
+        color: var(--blue);
     }
-    #check-index
-    {
-        color:var(--blue);
+
+    #check-index {
+        color: var(--blue);
         font-size: 50px;
     }
-    #check-content
-    {
+
+    #check-content {
         font-weight: bolder;
-        font-size:  18px;
+        font-size: 18px;
         text-align: left;
         margin: 5px 50px;
         height: 100%;
         overflow: auto;
     }
-    #check-state
-    {
+
+    #check-state {
         height: 100%;
         margin: auto 30px;
         height: auto;
     }
-    #check-state > input
-    {
-        display:none;
+
+    #check-state > input {
+        display: none;
     }
-    #check-state > label
-    {
+
+    #check-state > label {
         color: var(--blue);
         font-size: 30px;
     }

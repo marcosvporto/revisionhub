@@ -8,10 +8,12 @@
 
 <script>
     import Navbar from './components/Navbar'
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
     require('../node_modules/@fortawesome/fontawesome-free/css/all.min.css')
 
     export default {
         name: 'App',
+        mixins: [ConnectionMixin],
         components: {
             'navbar': Navbar
         },

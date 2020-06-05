@@ -125,26 +125,25 @@
         z-index: 100;
         position: absolute;
         top: 100%;
-        left:0;
+        left: 0;
         border: 1px #bbb solid;
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
         box-shadow: 0 0 1px 1px #ddd;
     }
 
-    #option-likes
-    {
-        margin-left:auto;
+    #option-likes {
+        margin-left: auto;
         margin-right: 5px;
         color: var(--light-green);
         font-size: small;
     }
 
     #caret-icon {
-        color:black;
-        cursor:pointer;
+        color: black;
+        cursor: pointer;
         height: 100%;
-        display:flex;
+        display: flex;
         align-items: center;
     }
 </style>

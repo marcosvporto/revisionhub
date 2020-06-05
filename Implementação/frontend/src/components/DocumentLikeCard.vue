@@ -13,36 +13,36 @@
 
 <script>
     import Card from "@/components/Card";
+
     export default {
         name: "DocumentLikeCard",
         components:
-        {
-            'card': Card
-        }
+            {
+                'card': Card
+            }
     }
 </script>
 
 <style scoped>
-    #card-body > span
-    {
-        color:black;
+    #card-body > span {
+        color: black;
         text-align: left;
         font-weight: bolder;
         margin-bottom: 10px;
     }
-    #button-group
-    {
+
+    #button-group {
         justify-content: space-between;
         padding: 10px 30px;
-        margin-top:auto;
-        margin-bottom:3px;
+        margin-top: auto;
+        margin-bottom: 3px;
 
     }
-    #button-group > button
-    {
-        color:white;
+
+    #button-group > button {
+        color: white;
         padding: 8px 30px;
-        border:none;
-        cursor:pointer;
+        border: none;
+        cursor: pointer;
     }
 </style>

@@ -4,11 +4,11 @@
                      @submit="selectDocument($event)"
                      @close="picking=false"
         />
-        <export-card v-if="exporting" @export="exportDocument($event)" @close="exporting=false" />
-        <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)" />
+        <export-card v-if="exporting" @export="exportDocument($event)" @close="exporting=false"/>
+        <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)"/>
         <div class="flex-column flex-shrink checklist-info">
-            <span class="checklist-title">{{tituloMockado}}</span>
-            <span id="checklist-description">Likes: {{numLikesMockado}}</span>
+            <span class="checklist-title">{{checklist.title}}</span>
+            <span id="checklist-description">Likes: {{checklist.likes}}</span>
         </div>
         <div id="checklist-container" class="flex-column flex-grow">
             <div id="checklist-actions" class="flex-row flex-shrink">
@@ -20,14 +20,14 @@
 
             </div>
             <div id="checklist-body" class="flex-row flex-grow" ref="page">
-                <div id="checklist-document" >
+                <div id="checklist-document">
                     <pdf v-if="selectedDocument" :src="selectedDocument" :page="currentPage"
                          @num-pages="maxPage = $event" @page-loaded="setPageHeight" ref="document"></pdf>
                     <i class="fas fa-arrow-left" v-if="selectedDocument" @click="pageIndex--"></i>
                     <i class="fas fa-arrow-right" v-if="selectedDocument" @click="pageIndex++"></i>
                 </div>
                 <div id="checklist-checks">
-                    <checklist :checklist="checklistMockado"/>
+                    <checklist :checks="values"/>
                 </div>
             </div>
 
@@ -42,9 +42,11 @@
     import DocumentExportCard from "@/components/DocumentExportCard";
     import DocumentLikeCard from "@/components/DocumentLikeCard";
     import Checklist from "@/components/Checklist";
+    import ConnectionMixin from "@/mixins/ConnectionMixin";
 
     export default {
         name: "ChecklistView",
+        mixins: [ConnectionMixin],
         components: {
             pdf,
             'upload-card': DocumentUploadCard,
@@ -54,18 +56,17 @@
         },
         props:
             {
-                checklistId: Number
+                checklist: {
+                    require: true,
+                    type: Object
+                }
             },
         data: function () {
             return {
+                checks: [],
                 picking: false,
                 exporting: false,
-                liking:false,
-                tituloMockado: "Checklist 1",
-                checklistMockado: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue nibh sit amet sapien pharetra, at luctus nulla pharetra. Nulla vehicula mattis massa quis imperdiet. Proin porttitor hendrerit odio, ut consequat ipsum elementum quis. Suspendisse potenti. Phasellus posuere tempus accumsan. In varius, justo id eleifend auctor, lorem odio aliquet nisi, dignissim vestibulum arcu erat nec metus. Nunc ornare tempor enim, eu egestas odio. Morbi non sollicitudin ante, ut auctor urna. Nunc interdum sodales tincidunt. Suspendisse volutpat tortor nec efficitur consequat. Morbi dolor magna, vehicula laoreet rutrum ut, convallis sed neque. Integer eu tincidunt quam, a finibus lorem.',
-                    'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta','Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta', 'Pergunta',
-                ],
-                numLikesMockado: 3,
+                liking: false,
                 selectedDocument: null,
                 pageIndex: 0,
                 maxPage: null
@@ -87,17 +88,20 @@
                     page.style.height = (document.$el.clientHeight + 50).toString() + 'px'
                 }
             },
-            exportDocument()
-            {
+            exportDocument() {
                 this.liking = true
             },
-            endReview(like)
-            {
-                if(like)
-                {
-                    console.log(like)
+            async endReview(like) {
+                if (like) {
+                    let connection = this.getUnauthenticatedRoute()
+                    try {
+                        await connection.patch('checklists/' + this.checklist.id)
+                    } catch (e) {
+                        await this.handleResponseError(e)
+                        return
+                    }
                 }
-                this.$router.push('/')
+                await this.$router.push('/')
             }
         },
         computed:
@@ -109,13 +113,26 @@
                         return this.maxPage - ((-this.pageIndex) % this.maxPage)
                     }
 
+                },
+                values() {
+                    return this.checks.map(x => x.text)
                 }
             },
-        mounted() {
-            if (this.checklistId === null) {
+        async mounted() {
+            if (this.checklist === null) {
                 this.$router.push('Choice')
             }
-            window.addEventListener('resize',this.setPageHeight)
+            window.addEventListener('resize', this.setPageHeight)
+
+            let connection = this.getUnauthenticatedRoute()
+            let response
+            try {
+                response = await connection.get('/checklists/' + this.checklist.id + '/checks/')
+            } catch (e) {
+                await this.handleResponseError(e)
+                return
+            }
+            this.checks = response.data || []
         }
     }
 </script>
@@ -178,6 +195,6 @@
         border-right: var(--light) solid;
         min-width: 500px;
         overflow: auto;
-        margin-right:15px;
+        margin-right: 15px;
     }
 </style>

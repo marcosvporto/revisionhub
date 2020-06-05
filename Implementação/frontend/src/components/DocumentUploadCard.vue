@@ -16,27 +16,24 @@
 <script>
     import DocumentUploadPicker from "@/components/DocumentUploadPicker";
     import Card from "@/components/Card";
+
     export default {
         name: "DocumentUploadCard",
-        components:{
+        components: {
             'picker': DocumentUploadPicker,
             'card': Card
         },
-        data: function() {
+        data: function () {
             return {
                 selectedDocument: null
             }
         },
         methods: {
-            submit()
-            {
-                if(this.selectedDocument)
-                {
-                    this.$emit('submit',this.selectedDocument)
+            submit() {
+                if (this.selectedDocument) {
+                    this.$emit('submit', this.selectedDocument)
                     this.$emit('close')
-                }
-                else
-                {
+                } else {
                     alert('Selecione um documento PDF')
                 }
             }
@@ -46,26 +43,25 @@
 
 <style scoped>
 
-    #card-body > span
-    {
-        color:black;
+    #card-body > span {
+        color: black;
         text-align: left;
         font-weight: bolder;
         margin-bottom: 10px;
     }
-    #button-group
-    {
+
+    #button-group {
         justify-content: space-between;
         padding: 10px 30px;
-        margin-top:auto;
-        margin-bottom:3px;
+        margin-top: auto;
+        margin-bottom: 3px;
 
     }
-    #button-group > button
-    {
-        color:white;
+
+    #button-group > button {
+        color: white;
         padding: 8px 30px;
-        border:none;
-        cursor:pointer;
+        border: none;
+        cursor: pointer;
     }
 </style>

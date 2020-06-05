@@ -81,19 +81,16 @@
                                 password: this.password
                             })
                         } catch (e) {
-                            if(e.response)
-                            {
+                            if (e.response) {
                                 this.errors.push(e.response.data.message)
-                            }
-                            else
-                            {
+                            } else {
                                 this.errors.push(e)
                             }
                             return
                         }
 
                         if (response.status === 200) {
-                            this.connect(response.data.token,response.data.user.id)
+                            this.connect(response.data.token, response.data.user.id)
                             await this.$alert('Login efetuado com sucesso')
                             this.$emit('close')
                         } else {
@@ -109,10 +106,8 @@
                     if (this.email.length > 0
                         && this.name.length > 0
                         && this.password.length > 0
-                        && this.confirmedPassword.length > 0)
-                    {
-                        if(this.password !== this.confirmedPassword)
-                        {
+                        && this.confirmedPassword.length > 0) {
+                        if (this.password !== this.confirmedPassword) {
                             this.errors.push('Senha e confirmação não são iguais.')
                             return
                         }
@@ -127,18 +122,15 @@
                                 password: this.password
                             })
                         } catch (e) {
-                            if(e.response)
-                            {
+                            if (e.response) {
                                 this.errors.push(e.response.data.message)
-                            }
-                            else
-                            {
+                            } else {
                                 this.errors.push(e)
                             }
                             return
                         }
                         if (response.status === 200) {
-                            this.connect(response.data.token,response.data.user.id)
+                            this.connect(response.data.token, response.data.user.id)
                             await this.$alert('Cadastro feito com sucesso.')
                             this.action = 'login'
                         } else {

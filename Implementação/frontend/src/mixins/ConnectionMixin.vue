@@ -56,6 +56,21 @@
                     }
                 })
                 return axiosInstance
+            },
+            async handleResponseError(error)
+            {
+                if (error.status === 401)
+                {
+                    this.disconnect()
+                    await this.$alert('Conexão expirada. Faça login novamente.')
+                    await this.$router.push('/')
+                }
+                else if (error.response) {
+                    await this.$alert(error.response.data.message)
+                } else {
+                    await this.$alert(error)
+                }
+
             }
         },
         computed:

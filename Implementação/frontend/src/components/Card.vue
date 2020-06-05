@@ -17,24 +17,23 @@
     export default {
         name: "Card",
         props:
-        {
-            height: {
-                required: false,
-                default: "300px"
-            },
-            width: {
-                required: false,
-                default: "400px"
+            {
+                height: {
+                    required: false,
+                    default: "300px"
+                },
+                width: {
+                    required: false,
+                    default: "400px"
+                }
             }
-        }
     }
 </script>
 
 <style scoped>
-    #background
-    {
+    #background {
         position: absolute;
-        top:0;
+        top: 0;
         left: 0;
         background-color: transparent;
         width: 100vw;
@@ -42,8 +41,8 @@
         z-index: 100;
         backdrop-filter: blur(1px);
     }
-    #card-container
-    {
+
+    #card-container {
         min-height: 200px;
         position: absolute;
         top: 0;
@@ -55,10 +54,10 @@
         height: 300px;
         z-index: 200;
         background-color: white;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
-    #card-title
-    {
+
+    #card-title {
         background-color: var(--dark);
         height: 100px;
         width: 100%;
@@ -68,16 +67,16 @@
         font-size: 25px;
         padding: 10px;
     }
-    #card-reason
-    {
+
+    #card-reason {
         margin-left: auto;
         margin-right: 8px;
         font-weight: 700;
     }
-    #card-body
-    {
+
+    #card-body {
         width: 100%;
         height: 60%;
-        padding:20px;
+        padding: 20px;
     }
 </style>

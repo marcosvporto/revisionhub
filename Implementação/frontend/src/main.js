@@ -17,9 +17,12 @@ const routes = [
   {path:'/',alias:'/choose',name:'Choice',component:ChecklistChoice},
   {path:'/mychecklists',name:'MyChecklists',component:ChecklistMyChecklists},
   {path:'/create',name:'Create',component:ChecklistCreate,props:true},
-  {path:'/view/:checklistId',name:'View',component:ChecklistView,props:true}
+  {path:'/view/:checklist',name:'View',component:ChecklistView,props:true}
 ]
-const router = new VueRouter({routes,mode:'history'})
+const router = new VueRouter({
+  base:'/revisionhub',
+  routes,
+  mode:'history'})
 
 Vue.use(VueRouter)
 Vue.use(VueSimpleAlert)

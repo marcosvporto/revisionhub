@@ -14,10 +14,10 @@
         </div>
         <div class="button-group">
             <button v-if="isConnected" id="listButton" class="bg-light rounded-button"
-                    @click="$router.push('MyChecklists')">Minhas Listas
+                    @click="$router.push({name:'MyChecklists'})">Minhas Listas
             </button>
             <button v-if="isConnected" id="unlogButton" class="bg-red rounded-button" @click="disconnect()">
-            Logout
+                Logout
             </button>
             <button v-if="!isConnected" id="logButton" class="bg-light-green rounded-button" @click="loginOpen=true">
                 Login/Registrar
@@ -44,11 +44,11 @@
             }
         },
         methods:
-        {
-            returnHome() {
-                this.$router.push('/')
+            {
+                returnHome() {
+                    this.$router.push('/')
+                }
             }
-        }
     }
 </script>
 

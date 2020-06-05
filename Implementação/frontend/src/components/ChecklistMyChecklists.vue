@@ -10,8 +10,12 @@
             <div id="body-container" class="flex-column">
                 <span id="select-label" class="flex-shrink">Administre suas checklists aqui</span>
                 <div id="select-container" class="flex-row flex-grow">
-                    <checklist-options class="select-box" :options="options" :values="values" :likes="likes" v-model="selectedChecklist" label="Escolha uma checklist"></checklist-options>
-                    <button class="bg-white rounded-button" :class="(selectedChecklist!=null)?'enabled-edit':'disabled-edit'" @click="editChecklist">Editar</button>
+                    <checklist-options class="select-box" :options="options" :values="values" :likes="likes"
+                                       v-model="selectedChecklist" label="Escolha uma checklist"></checklist-options>
+                    <button class="bg-white rounded-button"
+                            :class="(selectedChecklist!=null)?'enabled-edit':'disabled-edit'" @click="editChecklist">
+                        Editar
+                    </button>
                 </div>
             </div>
         </div>
@@ -21,34 +25,35 @@
 <script>
     import ChecklistOptions from "@/components/ChecklistOptions";
     import ConnectionMixin from "@/mixins/ConnectionMixin";
+
     export default {
         name: "ChecklistMyChecklists",
         components:
-        {
-            'checklist-options':ChecklistOptions
-        },
+            {
+                'checklist-options': ChecklistOptions
+            },
         mixins: [ConnectionMixin],
-        data:function() {
+        data: function () {
             return {
                 selectedChecklist: null,
                 checklists: []
             };
         },
         methods: {
-            editChecklist()
-            {
-                if(this.selectedChecklist != null)
-                {
-                    this.$router.push({name:'Create',params:{ checklist:this.checklists.find(x => x.id == this.selectedChecklist) }})
+            editChecklist() {
+                if (this.selectedChecklist != null) {
+                    this.$router.push({
+                        name: 'Create',
+                        params: {checklist: this.checklists.find(x => x.id == this.selectedChecklist)}
+                    })
                 }
             },
-            createChecklist()
-            {
-                this.$router.push({name:'Create',params:{ checklist:null }})
+            createChecklist() {
+                this.$router.push({name: 'Create', params: {checklist: null}})
             }
         },
         computed: {
-            options()  {
+            options() {
 
                 return this.checklists.map(x => {
                     return x.title
@@ -65,26 +70,22 @@
                 })
             }
         },
-        async mounted()
-        {
+        async mounted() {
             let connection
             try {
                 connection = this.getAuthenticatedRoute()
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
                 await this.$router.push('/')
                 return
             }
             let response
             try {
-                response =  await connection.get('/checklists/'+this.getUserId())
-            } catch(e) {
-                if(e.response)
-                {
+                response = await connection.get('/checklists/' + this.getUserId())
+            } catch (e) {
+                if (e.response) {
                     await this.$alert(e.response.data.message)
-                }
-                else
-                {
+                } else {
                     await this.$alert(e)
                 }
                 await this.$router.push('/')
@@ -96,21 +97,20 @@
 </script>
 
 <style scoped>
-    #page-body > button
-    {
+    #page-body > button {
         padding: 10px 30px;
         font-size: 17px;
         color: white;
         font-weight: 400;
         margin-left: 50px;
         margin-right: auto;
-        margin-top:5%;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        margin-top: 5%;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     }
-    #body-container
-    {
-        color:var(--blue);
-        height:65px;
+
+    #body-container {
+        color: var(--blue);
+        height: 65px;
         width: 50%;
         min-width: 450px;
         margin-left: 50px;
@@ -118,33 +118,33 @@
         margin-top: 5%;
         text-align: left;
     }
-    .disabled-edit
-    {
+
+    .disabled-edit {
         padding: 12px 40px;
         color: var(--light);
         border: var(--light) 3px solid;
-        height:100%;
+        height: 100%;
         font-weight: 400;
         font-size: 15px;
         margin-left: 35px;
     }
-    .enabled-edit
-    {
+
+    .enabled-edit {
         padding: 12px 40px;
         color: var(--light-green);
         border: var(--light-green) 3px solid;
-        height:100%;
+        height: 100%;
         font-weight: 400;
         font-size: 15px;
         margin-left: 35px;
     }
-    #select-label
-    {
+
+    #select-label {
         font-size: 15px;
         margin: 2px 5px;
     }
-    .select-box
-    {
+
+    .select-box {
         border: var(--blue) 3px solid;
     }
 </style>
