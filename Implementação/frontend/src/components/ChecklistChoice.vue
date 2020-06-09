@@ -122,6 +122,6 @@
     .main-container {
         text-align: left;
         align-items: baseline;
-        padding: 20px;
+        padding: 20px 60px;
     }
 </style>

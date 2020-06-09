@@ -183,6 +183,7 @@
 
     #page-body {
         height: 69vh;
+        padding: 20px 10px;
     }
 
     #button-group {
