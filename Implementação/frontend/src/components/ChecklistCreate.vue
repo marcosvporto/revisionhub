@@ -11,7 +11,7 @@
             </div>
             <transition-group name="checklist" id="check-container" class="flex-grow flex-column" tag="div">
                 <check-edit class="checklist-item" v-for="(check,index) in checks" v-model="checks[index].text"
-                            :key="checks[index]['checklist_id']" @remove="removeCheck(index)"
+                            :key="checks[index].id" @remove="removeCheck(index)"
                             @input="editCheck(index)"/>
             </transition-group>
         </div>
@@ -57,7 +57,8 @@
                 addCheck() {
                     let check = {
                         text: '',
-                        checklist_id: this.checks.length
+                        id: this.checks.length,
+                        checklist_id: this.checklist.id
                     }
                     this.checks.push(check)
                     this.added.push(check)
@@ -67,7 +68,7 @@
                     this.edited.push(check)
                 },
                 removeCheck(index) {
-                    let removed = this.checks.splice(index, 1)
+                    let removed = this.checks.splice(index, 1)[0]
                     this.removed.push(removed)
                 },
                 async saveChecklist() {
@@ -101,7 +102,7 @@
                             continue
                         }
                         try {
-                            await this.authenticatedConnection.delete('/checklists/' + this.checklist.id + '/checks/' + check.checklist_id)
+                            await this.authenticatedConnection.delete('/checklists/' + this.checklist.id + '/checks/' + check.id)
                         } catch (e) {
                             await this.handleResponseError(e)
                             return
@@ -112,7 +113,7 @@
                             continue
                         }
                         try {
-                            await this.authenticatedConnection.put('/checklists/' + this.checklist.id + '/checks/' + check.checklist_id, {
+                            await this.authenticatedConnection.put('/checklists/' + this.checklist.id + '/checks/' + check.id, {
                                 text: check.text
                             })
                         } catch (e) {

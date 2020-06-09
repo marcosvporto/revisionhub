@@ -1,8 +1,7 @@
 <script>
     import axios from 'axios'
 
-    let API_URL = 'http://localhost:3333/'
-
+    let API_URL = 'https://desolate-beach-96822.herokuapp.com/'
     export default {
         name: "ConnectionMixin",
         data: function() {

@@ -1,5 +1,5 @@
 <template>
-    <div id="background" @click.self="$emit('close')">
+    <div id="background" @mousedown.self="$emit('close')">
         <div id="card-container" :style="{'height':height,'width':width}">
             <div id="card-title">
                 <img src="../assets/img/rev-hub-icon.svg" width="90" height="100" alt="Icone">
