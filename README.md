@@ -4,10 +4,6 @@
 # RevisionHub 
 RevisionHub é um hub de Checklists que atendem a processos de inspeção (Fagan, 1976).
 
-## Preview
-
-https://marcosvporto.github.io/revisionhub/
-
 ## Descrição
 
 No RevisionHub atenderá inspetores com pouca experiência na etapa de inspeção de Fagan, que pretendem validar documentos, mas que precisam de um mockup de checklist para tal. As checklist serão adicionadas a plataforma por revisores (usuários cadastrados), devidamente logados, e poderão ser acessadas por transeuntes (qualquer usuário, sem a necessidade de cadastro ou login). O transeunte que acessa a página terá a possibilidade de buscar uma checklist, fazer upload de um documento, gerar um relatório com base no preenchimento dessa checklist e ,ao final do processo, dar um like na checklist. As checklists, portanto, contarão com uma quantidade de likes que será importante para se destacar entre as demais checklists, na página de busca.    
