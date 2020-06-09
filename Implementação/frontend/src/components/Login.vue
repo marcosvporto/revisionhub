@@ -130,7 +130,7 @@
                             return
                         }
                         if (response.status === 200) {
-                            this.connect(response.data.token, response.data.user.id)
+                            this.connect(response.data.token, response.data.id)
                             await this.$alert('Cadastro feito com sucesso.')
                             this.action = 'login'
                         } else {

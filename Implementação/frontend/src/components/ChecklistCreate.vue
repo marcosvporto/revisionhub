@@ -152,9 +152,7 @@
             this.authenticatedConnection = connection
 
 
-            if (this.checklist.id !== null) {
-
-
+            if (this.checklist.id !== -1) {
                 let response
                 /* Requisitando checks */
                 try {

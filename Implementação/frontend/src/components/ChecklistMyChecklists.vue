@@ -49,7 +49,7 @@
                 }
             },
             createChecklist() {
-                this.$router.push({name: 'Create', params: {checklist: null}})
+                this.$router.push({name: 'Create'})
             }
         },
         computed: {
@@ -75,7 +75,7 @@
             try {
                 connection = this.getAuthenticatedRoute()
             } catch (error) {
-                console.log(error)
+                await this.handleResponseError(error)
                 await this.$router.push('/')
                 return
             }
@@ -83,11 +83,7 @@
             try {
                 response = await connection.get('/checklists/' + this.getUserId())
             } catch (e) {
-                if (e.response) {
-                    await this.$alert(e.response.data.message)
-                } else {
-                    await this.$alert(e)
-                }
+                await this.handleResponseError(e)
                 await this.$router.push('/')
                 return
             }

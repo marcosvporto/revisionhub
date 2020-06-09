@@ -58,7 +58,7 @@
             },
             async handleResponseError(error)
             {
-                if (error.status === 401)
+                if (error.response.status === 401)
                 {
                     this.disconnect()
                     await this.$alert('Conexão expirada. Faça login novamente.')
