@@ -58,18 +58,19 @@
             },
             async handleResponseError(error)
             {
-                if (error.response.status === 401)
+                if(!error.response)
+                {
+                    await this.$alert(error)
+                }
+                else if (error.response.status === 401)
                 {
                     this.disconnect()
                     await this.$alert('Conexão expirada. Faça login novamente.')
                     await this.$router.push('/')
                 }
-                else if (error.response) {
+                else {
                     await this.$alert(error.response.data.message)
-                } else {
-                    await this.$alert(error)
                 }
-
             }
         },
         computed:

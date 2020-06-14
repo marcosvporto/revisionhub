@@ -75,7 +75,7 @@
             try {
                 connection = this.getAuthenticatedRoute()
             } catch (error) {
-                await this.$alert('Conexão expirada. Faça login novamente.')
+                await this.$alert('Conexão inválida. Faça login novamente.')
                 await this.$router.push('/')
                 return
             }
