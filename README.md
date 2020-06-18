@@ -40,6 +40,9 @@ Nós do grupo Grupo 1, deliberamos que para a consecução de tal projeto, o fra
 
 - O código do projeto deve estar versionado do github.
 
+## Cronograma de Atividades
+
+[Gantt Chart e Lista de Tarefas] (https://drive.google.com/drive/folders/1XAH825r34Td_DWuh7giurCdzr0dpRrXD?usp=sharing)
 
 ## Contribuições
 
