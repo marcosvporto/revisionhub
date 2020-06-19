@@ -19,7 +19,7 @@ describe('Check.vue', () => {
         slots: {
             default: 'MockText'
         },
-        propsData: { index: 2}
+        propsData: { index: 1}
     })
     it('starts with false state', () => {
         expect(wrapper.vm.$data.state).toBe(false)
