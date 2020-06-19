@@ -204,7 +204,6 @@
     #add-button {
         color: var(--light-green);
         font-size: 60px;
-        cursor: pointer;
         margin-left: 50px;
     }
 

@@ -9,7 +9,9 @@
         <div id="select-container" class="flex-row">
             <checklist-opcoes class="select-box flex-grow" :options="options" :values="values" :likes="likes"
                               v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
-            <button @click="selectChecklist" class="bg-light flex-shrink">Go</button>
+            <button @click="selectChecklist" class="bg-light flex-shrink"
+                    :class="(this.selectedChecklist)?'bg-light-green':''" :disabled="!this.selectedChecklist">Go
+            </button>
         </div>
 
     </div>
@@ -116,7 +118,6 @@
         height: 100%;
         font-weight: 400;
         font-size: 20px;
-        cursor: pointer;
     }
 
     .main-container {

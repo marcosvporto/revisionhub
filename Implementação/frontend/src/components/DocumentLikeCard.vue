@@ -44,7 +44,6 @@
         color: white;
         padding: 8px 30px;
         border: none;
-        cursor: pointer;
         margin-right: 5px;
     }
 </style>

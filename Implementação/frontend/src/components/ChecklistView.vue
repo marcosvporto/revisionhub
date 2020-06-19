@@ -167,7 +167,6 @@
         padding: 8px 30px;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
         margin-right: 10px;
     }
 
