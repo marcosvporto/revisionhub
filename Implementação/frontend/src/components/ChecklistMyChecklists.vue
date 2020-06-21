@@ -7,10 +7,11 @@
         </div>
         <div id="page-body" class="flex-grow bg-white flex-column">
             <button class="bg-light-green rounded-button" @click="createChecklist">Create</button>
-            <div id="body-container" class="flex-column">
+            <div id="body-container" class="flex-column flex-grow">
                 <span id="select-label" class="flex-shrink">Administre suas checklists aqui</span>
-                <div id="select-container" class="flex-row flex-grow">
+                <div id="select-container" class="flex-row flex-shrink">
                     <checklist-options class="select-box" :options="options" :values="values" :likes="likes"
+                                       :deleting="true" @delete="deleteChecklist($event)"
                                        v-model="selectedChecklist" label="Escolha uma checklist"></checklist-options>
                     <button class="bg-white rounded-button"
                             :class="(selectedChecklist!=null)?'enabled-edit':'disabled-edit'" @click="editChecklist">
@@ -36,20 +37,34 @@
         data: function () {
             return {
                 selectedChecklist: null,
-                checklists: []
+                checklists: [],
+                connection: null
             };
         },
         methods: {
             editChecklist() {
                 if (this.selectedChecklist != null) {
                     this.$router.push({
-                        name: 'Create',
+                        name: 'Edit',
                         params: {checklist: this.checklists.find(x => x.id == this.selectedChecklist)}
                     })
                 }
             },
             createChecklist() {
                 this.$router.push({name: 'Create'})
+            },
+            async deleteChecklist(id) {
+                const checklist = this.checklists.find((el) => el.id === id)
+                if (checklist) {
+                    try {
+                        await this.connection.delete('/checklists/' + checklist.id)
+                    } catch (e) {
+                        await this.handleResponseError(e)
+                        return
+                    }
+                    this.checklists.splice(this.checklists.findIndex((el) => el.id === id),1)
+                    this.$alert('Removido com sucesso')
+                }
             }
         },
         computed: {
@@ -71,9 +86,8 @@
             }
         },
         async mounted() {
-            let connection
             try {
-                connection = this.getAuthenticatedRoute()
+                this.connection = this.getAuthenticatedRoute()
             } catch (error) {
                 await this.handleResponseError(error)
                 await this.$router.push('/')
@@ -81,7 +95,7 @@
             }
             let response
             try {
-                response = await connection.get('/checklists/' + this.getUserId())
+                response = await this.connection.get('/checklists/' + this.getUserId())
             } catch (e) {
                 await this.handleResponseError(e)
                 await this.$router.push('/')
@@ -115,11 +129,12 @@
         text-align: left;
     }
 
+
     .disabled-edit {
         padding: 12px 40px;
         color: var(--light);
         border: var(--light) 3px solid;
-        height: 100%;
+        height: 50px;
         font-weight: 400;
         font-size: 15px;
         margin-left: 35px;
@@ -129,7 +144,7 @@
         padding: 12px 40px;
         color: var(--light-green);
         border: var(--light-green) 3px solid;
-        height: 100%;
+        height: 50px;
         font-weight: 400;
         font-size: 15px;
         margin-left: 35px;
@@ -142,5 +157,6 @@
 
     .select-box {
         border: var(--blue) 3px solid;
+        height: 50px;
     }
 </style>
