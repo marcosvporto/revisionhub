@@ -1,9 +1,12 @@
 <template>
-    <div id="select-box" v-click-outside="close">
-        <input @click.self="click()" id="select-label" class="flex-grow" v-model="currentLabel"
-               :style="(currentLabel === label)?'color:var(--light)':''"/>
-        <i @click.self="click()" id="caret-icon" class="fas fa-caret-down flex-shrink"></i>
-        <div id="select-options" v-show="isOpen">
+    <div id="select-box" class="flex-column" v-click-outside="close">
+        <div id="input-box" class="flex-row flex-shrink">
+            <input @click.self="click()" id="select-label" class="flex-grow" v-model="currentLabel"
+                   :style="(currentLabel === label)?'color:var(--light)':''"/>
+            <i @click.self="click()" id="caret-icon" class="fas fa-caret-down flex-shrink"></i>
+        </div>
+
+        <div id="select-options" class="flex-grow" v-show="isOpen">
             <checklistItem
                     v-for="(option,index) in currentOptions"
                     :key="index"
@@ -12,7 +15,13 @@
             >
                 <template v-slot:label>
                     <span id="option-title">{{option}}</span>
-                    <span id="option-likes">Likes:{{likes[index]}}</span>
+                    <span id="option-likes">
+                        Likes:{{likes[index]}}
+                        <i @click.prevent="$emit('delete',values[index])"
+                            v-if="deleting"
+                           class="far fa-trash-alt"
+                           style="color:black;margin-left:10px;"></i>
+                    </span>
                 </template>
             </checklistItem>
         </div>
@@ -41,8 +50,17 @@
                 required: true,
                 type: Array
             },
+            authors: {
+                required: true,
+                type: Array
+            },
             value: {
                 required: true
+            },
+            deleting: {
+                required: false,
+                default: () => false,
+                type: Boolean
             }
         },
         data: function () {
@@ -98,14 +116,17 @@
 
 <style scoped>
     #select-box {
+
+        height: 100%;
+        width: 100%;
+    }
+
+    #input-box {
         background: #fff;
-        display: flex;
-        flex-flow: row;
         align-items: center;
         position: relative;
         padding: 0 5px;
-        height: 100%;
-        width: 100%;
+        min-height: 50px;
     }
 
     #select-label {
@@ -122,10 +143,6 @@
         width: 100%;
         max-height: 300px;
         overflow: auto;
-        z-index: 100;
-        position: absolute;
-        top: 100%;
-        left: 0;
         border: 1px #bbb solid;
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
