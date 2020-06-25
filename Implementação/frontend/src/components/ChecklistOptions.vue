@@ -85,12 +85,14 @@
         },
         computed: {
             currentLabel: {
+                //TODO
                 get() {
                     if (!this.isOpen) {
                         if (this.value !== null) {
-                            return this.options[this.values.findIndex(v => {
-                                return v === this.value
-                            })]
+                            let index = this.values.findIndex(value => {
+                                return value === this.value
+                            })
+                            return this.options[index]
                         } else {
                             return this.label
                         }
