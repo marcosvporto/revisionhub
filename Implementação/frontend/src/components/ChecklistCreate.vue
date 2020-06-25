@@ -67,7 +67,6 @@
                     let check = this.checks[index]
                     if(!(this.added.indexOf(check)>=0 || this.edited.indexOf(check)>=0))
                     {
-                        console.log(!this.added.indexOf(check)>=0,!this.edited.indexOf(check)>=0)
                         this.edited.push(check)
                     }
                 },
@@ -89,7 +88,9 @@
 
                     this.removed.push(removed)
                 },
+                //TODO,uma requisição
                 async saveChecklist() {
+                    //Comentar essa
                     if (this.checklist.id === -1) {
                         let response
                         try {
