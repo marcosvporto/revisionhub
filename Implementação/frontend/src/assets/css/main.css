@@ -1,0 +1,115 @@
+:root
+{
+    --dark: #3B3838;
+    --light:rgb(171,167,172);
+    --dark-green:rgb(66,117,97);
+    --light-green:rgb(2,219,125);
+    --blue:rgb(33,27,114);
+    --red:rgb(255,55,75);
+}
+/* Regras gerais */
+div{
+    box-sizing: border-box;
+}
+input, select, textarea, button{font-family:inherit;}
+body {
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+button, input, textarea {
+    outline: none;
+}
+body {
+    text-align: center;
+    color: white;
+    margin: 0;
+    background-color: var(--dark);
+    min-width: 500px;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+/* Classes de cores */
+.bg-dark
+{
+    background-color: var(--dark);
+}
+
+.bg-light
+{
+    background-color: var(--light);
+}
+
+.bg-light-green
+{
+    background-color: var(--light-green);
+}
+
+.bg-blue
+{
+    background-color: var(--blue);
+}
+
+.bg-red
+{
+    background-color: var(--red);
+}
+
+.bg-white
+{
+    background-color: white;
+}
+
+/* Classed de Display */
+.flex-column
+{
+    display:flex;
+    flex-direction: column;
+}
+.flex-row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-grow
+{
+    flex:1 1 auto;
+}
+
+.flex-shrink
+{
+    flex:0 0 auto;
+}
+
+.fill-screen
+{
+    /*width: 100vw;
+    height: 89vh;*/
+}
+
+.fill-parent
+{
+    width: 100%;
+    height: 100%;
+}
+
+/* Classes de Exibição */
+.rounded-button
+{
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.checklist-info {
+    margin-top: -80px;
+    padding-bottom: 100px;
+    pointer-events: none;
+}
+
+.checklist-title {
+    font-size: 40px;
+    font-weight: 300;
+}
