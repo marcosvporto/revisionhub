@@ -9,6 +9,7 @@
 <script>
     import Navbar from './components/Navbar'
     import ConnectionMixin from "@/mixins/ConnectionMixin";
+
     require('../node_modules/@fortawesome/fontawesome-free/css/all.min.css')
 
     export default {
@@ -18,22 +19,27 @@
             'navbar': Navbar
         },
         watch:
-        {
-            $route:
             {
-                handler: function(to)
-                {
-
-                    const protectedRoutes = ['MyChecklists','Create']
-                    if(protectedRoutes.indexOf(to.name) >=0 && !this.isConnected)
+                $route:
                     {
-                        this.$router.push('/')
-                        this.$alert('Você deve estar logado para acessar essa rota')
+                        //Função dedicada à proteger rotas que requerem login
+                        //Entrada: Próxima rota, status de conexão (logado/deslogado), rota atual
+                        //Tarefa: Redirecionar o usuário para a próxima rota, levando-o para a tela principal caso tente
+                        //acessar uma rota protegida sem permissão.
+                        //V&V: Confere se a rota seguinte está na lista de rotas protegidas. Confere o status de
+                        //conexão do usuário no caso de ser protegida. Alerta o usuário deslogado caso a rota seja protegida.
+                        //Pós Condições: Redirecionamento para uma rota adequada ao status de conexão do usuário.
+                        handler: function (to) {
+
+                            const protectedRoutes = ['MyChecklists', 'Create']
+                            if (protectedRoutes.indexOf(to.name) >= 0 && !this.isConnected) {
+                                this.$router.push('/')
+                                this.$alert('Você deve estar logado para acessar essa rota')
+                            }
+                        },
+                        immediate: true
                     }
-                },
-                immediate: true
             }
-        }
 
     }
 </script>

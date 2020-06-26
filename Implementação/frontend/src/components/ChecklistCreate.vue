@@ -65,13 +65,40 @@
                 },
                 editCheck(index) {
                     let check = this.checks[index]
-                    this.edited.push(check)
+                    if(!(this.added.indexOf(check)>=0 || this.edited.indexOf(check)>=0))
+                    {
+                        this.edited.push(check)
+                    }
                 },
                 removeCheck(index) {
                     let removed = this.checks.splice(index, 1)[0]
+
+                    let added = this.added.indexOf(removed)
+                    if(added>=0)
+                    {
+                        this.added.splice(added,1)
+                        return
+                    }
+
+                    let edited = this.edited.indexOf(removed)
+                    if(edited>=0)
+                    {
+                        this.edited.splice(edited,1)
+                    }
+
                     this.removed.push(removed)
                 },
+                //Função dedicada a salvar checklists
                 async saveChecklist() {
+                    //Entrada: Id e título da checklist atualmente sendo editada/criada.
+                    //Tarefa: Checar se se trata de uma edição/criação. Caso seja uma criação uma requisição deve ser feita
+                    //para comunicar a criação da checklist para o BackEnd
+                    //V&V: O id da checklist é inicializado como -1 e só é preenchido se a checklist existe no BackEnd. Caso
+                    //o id seja -1 é feita uma requisição para o servidor informando o título da nova checklist. A resposta
+                    //recebida do servidor contém detalhes sobre a nova checklist, incluindo seu id que é capturado e preenchido para
+                    //evitar que essa requisição se repita no próximo salvamento
+                    //Pós Condições: Checklist criada no servidor caso se trate de uma criação de checklist e inalterada
+                    //caso seja uma edição.
                     if (this.checklist.id === -1) {
                         let response
                         try {
@@ -95,12 +122,12 @@
                             await this.handleResponseError(e)
                             return
                         }
-                        check.checklist_id = response.data['checklist_id']
+                        check.id = response.data['id']
+
                     }
+                    this.added = []
+
                     for (let check of this.removed) {
-                        if (this.added.indexOf(check) >= 0) {
-                            continue
-                        }
                         try {
                             await this.authenticatedConnection.delete('/checklists/' + this.checklist.id + '/checks/' + check.id)
                         } catch (e) {
@@ -108,10 +135,9 @@
                             return
                         }
                     }
+                    this.removed = []
+
                     for (let check of this.edited) {
-                        if (this.added.indexOf(check) >= 0 || this.removed.indexOf(check) >= 0) {
-                            continue
-                        }
                         try {
                             await this.authenticatedConnection.put('/checklists/' + this.checklist.id + '/checks/' + check.id, {
                                 text: check.text
@@ -121,6 +147,8 @@
                             return
                         }
                     }
+                    this.edited = []
+
                     if (this.titleEdited) {
                         try {
                             await this.authenticatedConnection.put('/checklists/' + this.checklist.id, {
@@ -131,10 +159,6 @@
                             return
                         }
                     }
-
-                    this.added = []
-                    this.removed = []
-                    this.edited = []
                     this.titleEdited = false
 
                     await this.$alert('Salvo com sucesso')
@@ -145,7 +169,6 @@
             try {
                 connection = this.getAuthenticatedRoute()
             } catch (error) {
-                console.log(error)
                 await this.$router.push('/')
                 return
             }
@@ -204,8 +227,8 @@
     #add-button {
         color: var(--light-green);
         font-size: 60px;
-        cursor: pointer;
         margin-left: 50px;
+        cursor: pointer;
     }
 
     #check-container {

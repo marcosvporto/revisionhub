@@ -173,7 +173,6 @@
         width: 90px;
         margin-left: auto;
         margin-right: auto;
-        cursor: pointer;
     }
 
     .error-container {

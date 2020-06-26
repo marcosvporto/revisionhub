@@ -1,15 +1,21 @@
 <template>
     <div class="main-container flex-column fill-screen">
-        <div id="text-box">
+        <div id="text-box" class="flex-shrink">
             <div id="main-text">Descubra Checklists</div>
             <div id="secondary-text">
                 Uma aplicação web que te ajudará a achar a melhor lista de inspeção.
             </div>
         </div>
-        <div id="select-container" class="flex-row">
-            <checklist-opcoes class="select-box flex-grow" :options="options" :values="values" :likes="likes"
-                              v-model="selectedChecklist" label="Escolha uma checklist"></checklist-opcoes>
-            <button @click="selectChecklist" class="bg-light flex-shrink">Go</button>
+        <div id="select-container" class="flex-row flex-grow">
+            <checklist-opcoes class="select-box flex-grow"
+                              :options="options"
+                              :values="values"
+                              :likes="likes"
+                              v-model="selectedChecklist"
+                              label="Escolha uma checklist"></checklist-opcoes>
+            <button @click="selectChecklist" class="bg-light flex-shrink"
+                    :class="(this.selectedChecklist)?'bg-light-green':''" :disabled="!this.selectedChecklist">Go
+            </button>
         </div>
 
     </div>
@@ -100,7 +106,6 @@
         width: 60%;
         justify-content: space-between;
         min-width: 450px;
-        height: 50px;
     }
 
     .select-box {
@@ -116,7 +121,7 @@
         height: 100%;
         font-weight: 400;
         font-size: 20px;
-        cursor: pointer;
+        height: 50px;
     }
 
     .main-container {

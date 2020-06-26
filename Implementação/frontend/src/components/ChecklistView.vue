@@ -5,7 +5,7 @@
                      @close="picking=false"
         />
         <export-card v-if="exporting" @export="exportDocument($event)" @close="exporting=false"/>
-        <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)"/>
+        <like-card v-if="liking" @like="endReview(true)" @close="endReview(false)" @cancel="liking=false"/>
         <div class="flex-column flex-shrink checklist-info">
             <span class="checklist-title">{{checklist.title}}</span>
             <span id="checklist-description">Likes: {{checklist.likes}}</span>
@@ -167,7 +167,6 @@
         padding: 8px 30px;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
         margin-right: 10px;
     }
 
