@@ -62,6 +62,5 @@
         color: white;
         padding: 8px 30px;
         border: none;
-        cursor: pointer;
     }
 </style>
