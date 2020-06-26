@@ -88,9 +88,17 @@
 
                     this.removed.push(removed)
                 },
-                //TODO,uma requisição
+                //Função dedicada a salvar checklists
                 async saveChecklist() {
-                    //Comentar essa
+                    //Entrada: Id e título da checklist atualmente sendo editada/criada.
+                    //Tarefa: Checar se se trata de uma edição/criação. Caso seja uma criação uma requisição deve ser feita
+                    //para comunicar a criação da checklist para o BackEnd
+                    //V&V: O id da checklist é inicializado como -1 e só é preenchido se a checklist existe no BackEnd. Caso
+                    //o id seja -1 é feita uma requisição para o servidor informando o título da nova checklist. A resposta
+                    //recebida do servidor contém detalhes sobre a nova checklist, incluindo seu id que é capturado e preenchido para
+                    //evitar que essa requisição se repita no próximo salvamento
+                    //Pós Condições: Checklist criada no servidor caso se trate de uma criação de checklist e inalterada
+                    //caso seja uma edição.
                     if (this.checklist.id === -1) {
                         let response
                         try {

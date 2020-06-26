@@ -85,7 +85,14 @@
         },
         computed: {
             currentLabel: {
-                //TODO
+                //Função que determina a mensagem a ser mostrada na caixa do dropdown.
+                //Entrada: Estado atual do dropdown, termo de pesquisa digitado pelo usuário, lista de opções do dropdown.
+                //Tarefa: Mostrar um texto informativo sobre o estado atual do dropdown. No caso do dropdown estar fechado
+                //deve ser mostrado ou a opção atualmente selecionada ou, caso não haja seleção, um label que indentifique
+                //que ação o usuário tomar. Caso o dropdown esteja aberto deve ser mostrado o termo de busca do usuário.
+                //V&V: O status do dropdown é checado, dependendo dele é checado se existe seleção, caso exista ela é mostrada,
+                //caso contrário é mostrada a label. Se o dropdown estiver fechado a label é mostrada.
+                //Pós Condições: Exibição de uma mensagem informativa sobre o status atual do dropdown para o usuário.
                 get() {
                     if (!this.isOpen) {
                         if (this.value !== null) {
