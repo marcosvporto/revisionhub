@@ -1,6 +1,8 @@
 <template>
     <div id="checklist">
-        <check v-for="(check,index) in checks" :key="index" :index="index+1">{{check}}</check>
+        <check v-for="(check,index) in checks" :key="index" :index="index+1"
+               @checked="$emit('checked',{index:index,state:$event})">{{check}}
+        </check>
     </div>
 </template>
 

@@ -27,21 +27,30 @@
                     <i class="fas fa-arrow-right" v-if="selectedDocument" @click="pageIndex++"></i>
                 </div>
                 <div id="checklist-checks">
-                    <checklist :checks="values"/>
+                    <checklist :checks="values" @checked="checked[$event.index]=$event.state"/>
                 </div>
             </div>
 
         </div>
+        <html2pdf ref="html2pdf" :preview-modal="false" :enable-download="true" v-if="generating"
+                  :filename="`Relatorio ${checklist.title}`" pdf-format="a4" :paginate-elements-by-height="2000"
+                  pdf-content-width="800px" @hasGenerated="generating=false">
+            <section slot="pdf-content">
+                <print :title="checklist.title" :checks="values" :checked="checked"></print>
+            </section>
+        </html2pdf>
     </div>
 
 </template>
 
 <script>
     import pdf from 'vue-pdf'
+    import html2pdf from 'vue-html2pdf'
     import DocumentUploadCard from "@/components/DocumentUploadCard";
     import DocumentExportCard from "@/components/DocumentExportCard";
     import DocumentLikeCard from "@/components/DocumentLikeCard";
     import Checklist from "@/components/Checklist";
+    import ChecklistPrint from "./ChecklistPrint";
     import ConnectionMixin from "@/mixins/ConnectionMixin";
 
     export default {
@@ -49,6 +58,8 @@
         mixins: [ConnectionMixin],
         components: {
             pdf,
+            html2pdf,
+            'print': ChecklistPrint,
             'upload-card': DocumentUploadCard,
             'export-card': DocumentExportCard,
             'like-card': DocumentLikeCard,
@@ -64,9 +75,11 @@
         data: function () {
             return {
                 checks: [],
+                checked: [],
                 picking: false,
                 exporting: false,
                 liking: false,
+                generating: false,
                 selectedDocument: null,
                 pageIndex: 0,
                 maxPage: null
@@ -89,7 +102,13 @@
                 }
             },
             exportDocument() {
-                this.liking = true
+                this.generating = true
+                this.$nextTick(() => {
+                    this.$refs.html2pdf.generatePdf()
+                    this.exporting = false
+                    this.$alert('Seu PDF está sendo gerado')
+                })
+
             },
             async endReview(like) {
                 if (like) {
@@ -133,6 +152,7 @@
                 return
             }
             this.checks = response.data || []
+            this.checked = this.checks.map(() => false)
         }
     }
 </script>

@@ -13,7 +13,7 @@
                 <i v-if="state" class="far fa-check-square"></i>
                 <i v-if="!state" class="far fa-square"></i>
             </label>
-            <input :id="'checkbox'+index" type="checkbox" v-model="state"/>
+            <input :id="'checkbox'+index" type="checkbox" v-model="state" @change="$emit('checked',state)"/>
         </div>
     </div>
 </template>
