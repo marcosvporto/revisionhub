@@ -49,11 +49,7 @@
             likes: {
                 required: true,
                 type: Array
-            },
-            authors: {
-                required: true,
-                type: Array
-            },
+            }
             value: {
                 required: true
             },
