@@ -49,7 +49,7 @@
             likes: {
                 required: true,
                 type: Array
-            }
+            },
             value: {
                 required: true
             },
