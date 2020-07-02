@@ -127,7 +127,7 @@
             {
                 currentPage() {
                     if (this.pageIndex >= 0) {
-                        return (this.pageIndex + 1) % this.maxPage + 1
+                        return (this.pageIndex) % this.maxPage + 1
                     } else {
                         return this.maxPage - ((-this.pageIndex) % this.maxPage)
                     }
