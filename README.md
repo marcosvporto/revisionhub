@@ -7,7 +7,7 @@ RevisionHub é um hub de Checklists que atendem a processos de inspeção (Fagan
 ## [Acesse nosso site](https://marcosvporto.github.io/revisionhub/)
 
 
-O Heroku, que é o site que utilizamos para fazer o deploy do backend, tem uma limitação. Ao ficar muito tempo inativo, ele "desliga" e quando uma nova requisição é feita, ele religa e a operação de carregar o site pode demorar alguns instantes e dar a impressão de que estão ocorrendo bugs. Nesse caso, o ideal é aguardar o carregamento completo do site, antes de começar a usar.
+O Heroku, que é o servidor que utilizamos para fazer o deploy do backend, tem uma limitação. Ao ficar muito tempo inativo, ele "desliga". Quando uma nova requisição é feita, o Heroku religa e a operação de carregar o site pode demorar alguns segundos e dar a impressão de que estão ocorrendo bugs. Nesse caso, o ideal é aguardar o carregamento completo do site, antes de começar a usar.
 
 ## Descrição
 
