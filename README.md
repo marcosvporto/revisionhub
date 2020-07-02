@@ -33,13 +33,12 @@ Nós do grupo Grupo 1, deliberamos que para a consecução de tal projeto, o fra
 ## Requisitos para transeuntes
 
 - Qualquer transeunte, sem precisar estar logado, poderá acessar listas públicas de inspeção
-- O transeunte deve ser capaz de buscar listas de inspeção pelo nome, data de criação e data da ultima modificação.
 - O transeunte poderá selecionar uma checklist para realizar a inspeção de um documento.
 - O transeunte será capaz de fazer upload de um documento para realizar sua inspeção.
 - O transeunte deve ser capaz de preencher uma checklist durante a inspeção.
 - Será permitido ao transeunte gerar um relatório baseado no preenchimento de uma checklist.
 - Qualquer transeunte poderá dar um like em qualquer lista de inspeção pública.
-- Nenhum internauta poderá editar ou excluir alguma lista de inspeção.
+- Nenhum transeunte poderá editar ou excluir alguma lista de inspeção.
 
 ## Requisitos de Projeto
 
