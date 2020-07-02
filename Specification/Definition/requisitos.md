@@ -96,7 +96,7 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 <!-- 
 **[RU6]:** O usuário deve ser capaz de acessar um histórico de suas inspeções. -->
 
-**[RU4]:** O usuário deve ser capaz de buscar listas de inspeção pelo nome e datas de criação e de última modificação.
+<!-- **[RU4]:** O usuário deve ser capaz de buscar listas de inspeção pelo nome e datas de criação e de última modificação. -->
 
 **[RU5]:** Nenhum usuário deverá ser capaz de editar checklists de outros usuários.
 
@@ -144,7 +144,7 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 > **Fluxo Principal:** 
 >
 > 1. O sistema apresenta um formulário de criação de conta (possivelmente envolvendo um redirect para outra página, ou não).
-> 2. O usuário preenche: nome, login, senha, email, organização, e captcha. **[RN1]**
+> 2. O usuário preenche: nome, login, senha, email **[RN1]**
 > 3. O sistema valida as informações e redireciona o usuário para a página inicial da conta recém criada. **[A1]**
 > 
 > **Fluxos Alternativos:**
@@ -153,7 +153,7 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 > 
 > **Regras de negócios:**
 > 
-> **[RN1]:** Todos os campos, exceto organização, são obrigatórios e o email deve ser único.
+> **[RN1]:** Todos os campos são obrigatórios e o email deve ser único.
 
 **UCLOGIN - Login de Usuário**
 
@@ -202,16 +202,10 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 >   6. O sistema exibe uma tela de filtro com as seguintes informações.
 >   
 >      - Área de busca (text-input).
->      - Filtros de data de criação **[A1]** **[RN1]**.
->        - dois text-inputs de datas, ou dois date-pickers, para início e término dos períodos de filtro.
->      - Filtros de data de modificação **[A2]** **[RN1]**.
->        - dois text-inputs de datas, ou dois date-pickers, para início e término dos períodos de filtro.
 >      - Botão buscar.
 >
 >      Tabela com cada lista contendo:
 >      - Nome da lista.
->      - Data de criação.
->      - Data da última modificação.
 >      - Botão deletar.
 >      - Botão editar.
 >
@@ -233,19 +227,9 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 >
 >**Fluxos alternativos:**
 >
->  **[A1]:** O usuário preenche ambos os limites do campo "Filtros de datas de criação" com o dia atual e aciona o botão "Buscar":
->  1. O sistema exibe a mesma página com as listas filtradas pela data atual no campo "data de criação".
->  2. O fluxo segue segundo o passo 7 do fluxo principal.
->
->
->  **[A2]:** O usuário preenche ambos os limites do campo "Filtros de datas de modificação" com o dia atual e aciona o botão "Buscar":
->    1. O sistema exibe a mesma página com as listas filtradas pela data atual no campo "data da última modificação".
->    2. O fluxo segue segundo o passo 7 do fluxo principal.
 > 
 > **[A3]:** Se o usuário cancelar a deleção, ele permanece na página de filtro sem qualquer alteração.
 > 
->**Regras de Negócio:**
->**[RN1]:** Todos os filtros de busca por data são opcionais.
 
 **UCT1 - Gerenciamento de transeuntes**
 
@@ -265,16 +249,10 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 >   1. O sistema exibe uma tela de filtro com as seguintes informações.
 >   
 >      - Área de busca (text-input).
->      - Filtros de data de criação **[A1]** **[RN1]**.
->        - dois text-inputs de datas, ou dois date-pickers, para início e término dos períodos de filtro.
->      - Filtros de data de modificação **[A2]** **[RN1]**.
->        - dois text-inputs de datas, ou dois date-pickers, para início e término dos períodos de filtro.
 >      - Botão buscar.
 >
 >      Tabela com cada lista contendo:
 >      - Nome da lista.
->      - Data de criação.
->      - Data da última modificação.
 >      - Botão curtir.
 >
 >   7. O usuário escolhe uma lista e aciona o seu botão "curtir".
@@ -283,19 +261,9 @@ Para tal fim, grande foi nosso aprendizado na leitura de (Kalinowski et al.) a r
 > 
 > **Fluxos alternativos:**
 >
->  **[A1]:** O usuário preenche ambos os limites do campo "Filtros de datas de criação" com o dia atual e aciona o botão "Buscar":
->  1. O sistema exibe a mesma página com as listas filtradas pela data atual no campo "data de criação".
->  2. O fluxo segue segundo o passo 7 do fluxo principal.
->
->
->  **[A2]:** O usuário preenche ambos os limites do campo "Filtros de datas de modificação" com o dia atual e aciona o botão "Buscar":
->    1. O sistema exibe a mesma página com as listas filtradas pela data atual no campo "data da última modificação".
->    2. O fluxo segue segundo o passo 7 do fluxo principal.
 > 
 > **[A3]:** Se o usuário cancelar a deleção, ele permanece na página de filtro sem qualquer alteração.
 > 
->**Regras de Negócio:**
->**[RN1]:** Todos os filtros de busca por data são opcionais.
 
 
 
