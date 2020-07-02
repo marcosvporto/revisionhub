@@ -89,7 +89,7 @@
             try {
                 this.connection = this.getAuthenticatedRoute()
             } catch (error) {
-                await this.handleResponseError(error)
+                await this.$alert('Conexão inválida. Faça login novamente.')
                 await this.$router.push('/')
                 return
             }
