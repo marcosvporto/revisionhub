@@ -4,9 +4,6 @@
         <h1>Relatório da Checklist - {{title}}</h1>
         <table>
             <tr>
-                <th>
-                    Index
-                </th>
                 <th colspan="6">
                     Check
                 </th>
@@ -15,9 +12,6 @@
                 </th>
             </tr>
             <tr v-for="(check,index) in checks" :key="index">
-                <td colspan="1">
-                    {{index + 1}}
-                </td>
                 <td colspan="6">
                     {{check}}
                 </td>
@@ -50,6 +44,10 @@
     th {
         font-size:20px;
     }
+    th:nth-child(2)
+    {
+        text-align: center;
+    }
     table {
         color:black;
         width:90%;
@@ -59,14 +57,9 @@
         margin-right: auto;
     }
     td {
-        border: 1px solid black;
         font-size:35px;
     }
-    td:nth-child(1) {
-        text-align:center;
-        padding:9px 0px;
-    }
-    td:nth-child(3) {
+    td:nth-child(2) {
         font-size:50px;
         text-align: center;
         padding:0;
